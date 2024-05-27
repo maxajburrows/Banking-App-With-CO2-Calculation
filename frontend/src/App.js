@@ -20,13 +20,12 @@ function App() {
 
   return (
     <div className="App">
-      {data.map((account) =>
-        <>
-        <button type="button" class="btn btn-primary btn-lg">
-            <h2>{account.name}</h2>
-            <p>{account.iban}</p>
-          </button>
-        </>)}
+      {data.map((account) => (
+        <button key={account.id} type="button" className="btn btn-primary btn-lg">
+          <h2>{account.name}</h2>
+          <p>{account.iban}</p>
+        </button>
+      ))}
     </div>
   );
 }
