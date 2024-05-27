@@ -9,11 +9,13 @@ function Transactions() {
     const [transationData, setTransactionData] = useState([]);
 
     async function fetchData() {
-        let response = await fetch(`http://localhost:8080/transactions?from_iban=${iban}`);
-        if (!response.ok) {
+        let sentMoney = await fetch(`http://localhost:8080/transactions?from_iban=${iban}`);
+        let receivedMoney = await fetch(`http://localhost:8080/transactions?to_iban=${iban}`);
+
+        if (!sentMoney.ok || !receivedMoney.ok) {
             throw Error("Can't get accounts")
         }
-        setTransactionData(await response.json());
+        setTransactionData([...(await sentMoney.json()), ...(await receivedMoney.json())]);
     }
 
     useEffect(() => {
@@ -29,12 +31,14 @@ function Transactions() {
                     <th>Time</th>
                     <th>Category</th>
                     <th>Amount</th>
+                    <th>Sent/Received</th>
                 </tr>
                 {transationData.map((transaction) => (
                     <tr>
                         <td>{transaction.datetime}</td>
                         <td>{transaction.category}</td>
                         <td>{transaction.amount}</td>
+                        {transaction.from_iban === iban ? "Sent" : "Received"}
                     </tr>
                 ))}
                 </table>
