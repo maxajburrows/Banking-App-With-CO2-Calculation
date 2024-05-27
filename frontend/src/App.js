@@ -9,6 +9,7 @@ function App() {
     if (!response.ok) {
       throw Error("Can't get accounts")
     }
+    console.log("ran use effect")
     setData(await response.json());
   }
 
@@ -17,14 +18,11 @@ function App() {
   }, []);
 
 
-
-
-
   return (
     <div className="App">
       {data.map((account) =>
         <>
-          <button>
+        <button type="button" class="btn btn-primary btn-lg">
             <h2>{account.name}</h2>
             <p>{account.iban}</p>
           </button>
