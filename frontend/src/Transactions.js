@@ -47,9 +47,8 @@ function Transactions() {
                 throw new Error("Response was not ok")
             }
             const result = await response.json();
-            console.log(result);
+            console.log(result)
             setRefresh(prev => !prev)
-            console.log(refresh)
         } catch (error) {
             console.log("Error:", error)
         }

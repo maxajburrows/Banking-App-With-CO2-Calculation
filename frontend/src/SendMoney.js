@@ -27,7 +27,6 @@ function SendMoney({ handleSent }) {
                     <label>Iban:</label>
                     <input
                         type="text"
-                        value={iban}
                         onChange={(e) => setIban(e.target.value)}
                         required
                     />
@@ -36,7 +35,6 @@ function SendMoney({ handleSent }) {
                     <label>Amount:</label>
                     <input
                         type="number"
-                        value={amount}
                         onChange={(e) => setAmount(e.target.value)}
                         required
                     />
@@ -45,7 +43,6 @@ function SendMoney({ handleSent }) {
                     <label>Description:</label>
                     <input
                         type="text"
-                        value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
                     />
