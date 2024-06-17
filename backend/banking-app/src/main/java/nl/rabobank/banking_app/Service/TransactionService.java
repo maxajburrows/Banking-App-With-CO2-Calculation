@@ -34,6 +34,18 @@ public class TransactionService {
         return transactionRepository.addTransaction(transaction);
     }
 
+    public String editCategory(String transactionId, String category) {
+        Transaction updatedTransaction;
+        for (Transaction transaction : transactionRepository.listAllTransactions()) {
+            if (transaction.getTransactionId().equals(transactionId)) {
+                updatedTransaction = transaction;
+                break;
+            }
+        }
+        transactionRepository.
+        return null;
+    }
+
     public List<SpendingItem> calculateSpending(String accountIBAN, Optional<LocalDateTime> startDate, Optional<LocalDateTime> endDate, Optional<PeriodBin> periodBin) {
         // If no start date no filter.
         // If no end date no filter.

@@ -6,11 +6,11 @@ import nl.rabobank.banking_app.Service.TransactionService;
 import nl.rabobank.banking_app.model.Transaction;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -35,5 +35,8 @@ public class TransactionController {
         return service.addTransaction(transaction);
     }
 
-
+    @PatchMapping("/{transactionId}")
+    public String editCategory(@PathVariable String transactionId, @RequestBody String category) {
+        return service.editCategory(transactionId, category);
+    }
 }
