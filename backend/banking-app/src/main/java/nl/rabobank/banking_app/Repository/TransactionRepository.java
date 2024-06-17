@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TransactionRepository {
     List<Transaction> listAllTransactions();
+    Transaction addTransaction(Transaction transaction);
 }

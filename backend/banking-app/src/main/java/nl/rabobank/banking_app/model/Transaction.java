@@ -3,22 +3,55 @@ package nl.rabobank.banking_app.model;
 import java.time.LocalDateTime;
 
 public class Transaction {
-    private final String iban;
-    private final int amount;
+    private String transactionId;
+    private final String fromIban;
+    private final String toIban;
+    private final int amountEuro;
+    private final int amountCent;
+    private final String description;
+    private String category;
     private final LocalDateTime transactionDateTime;
 
-    public Transaction(String iban, int amount, LocalDateTime transactionDateTime) {
-        this.iban = iban;
-        this.amount = amount;
+    public Transaction(String transactionId, String fromIban, String toIban, final int amountEuro, final int amountCent, final String description, LocalDateTime transactionDateTime) {
+        this.fromIban = fromIban;
+        this.toIban = toIban;
+        this.amountEuro = amountEuro;
+        this.amountCent = amountCent;
+        this.description = description;
         this.transactionDateTime = transactionDateTime;
     }
 
-    public String getIban() {
-        return iban;
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
     }
 
-    public int getAmount() {
-        return amount;
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public String getFromIban() {
+        return fromIban;
+    }
+
+    public String getToIban() {
+        return toIban;
+    }
+
+    public int getAmountEuro() {
+        return amountEuro;
+    }
+
+    public int getAmountCent() {
+        return amountCent;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public LocalDateTime getTransactionDateTime() {

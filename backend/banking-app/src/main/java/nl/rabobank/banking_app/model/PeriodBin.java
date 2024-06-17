@@ -1,5 +1,8 @@
 package nl.rabobank.banking_app.model;
 
 public enum PeriodBin {
-    DAYS;
+    DAY,
+    WEEK,
+    MONTH,
+    YEAR;
 }
