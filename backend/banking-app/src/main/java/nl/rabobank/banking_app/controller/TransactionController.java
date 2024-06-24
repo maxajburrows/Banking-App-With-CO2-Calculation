@@ -36,7 +36,7 @@ public class TransactionController {
     }
 
     @PatchMapping("/{transactionId}")
-    public String editCategory(@PathVariable String transactionId, @RequestBody String category) {
+    public Transaction editCategory(@PathVariable String transactionId, @RequestBody String category) {
         return service.editCategory(transactionId, category);
     }
 }

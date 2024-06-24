@@ -30,7 +30,8 @@ public class FakeTransactionRepository implements TransactionRepository {
     }
 
     @Override
-    public Transaction editCategory(final String transactionId, final String category) {
-        return null;
+    public Transaction editCategory(Transaction transaction, String category) {
+        transaction.setCategory(category);
+        return transaction;
     }
 }

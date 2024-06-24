@@ -34,17 +34,18 @@ public class TransactionService {
         return transactionRepository.addTransaction(transaction);
     }
 
-    public String editCategory(String transactionId, String category) {
-        Transaction updatedTransaction;
+    public Transaction editCategory(String transactionId, String category) {
+        Transaction updatedTransaction = null;
         for (Transaction transaction : transactionRepository.listAllTransactions()) {
             if (transaction.getTransactionId().equals(transactionId)) {
                 updatedTransaction = transaction;
                 break;
             }
         }
-        // TODO: Finish implementing this
-        //transactionRepository.
-        return null;
+        if (updatedTransaction == null) {
+            return null;
+        }
+        return transactionRepository.editCategory(updatedTransaction, category);
     }
 
     public List<SpendingItem> calculateSpending(String accountIBAN, Optional<LocalDateTime> startDate, Optional<LocalDateTime> endDate, Optional<PeriodBin> periodBin) {

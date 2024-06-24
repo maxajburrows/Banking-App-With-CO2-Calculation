@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface TransactionRepository {
     List<Transaction> listAllTransactions();
     Transaction addTransaction(Transaction transaction);
-    Transaction editCategory(String transactionId, String category);
+    Transaction editCategory(Transaction transaction, String category);
 }

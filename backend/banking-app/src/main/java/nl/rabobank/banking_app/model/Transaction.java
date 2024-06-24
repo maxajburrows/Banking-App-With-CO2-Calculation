@@ -50,6 +50,10 @@ public class Transaction {
         return description;
     }
 
+    public void setCategory(final String category) {
+        this.category = category;
+    }
+
     public String getCategory() {
         return category;
     }
