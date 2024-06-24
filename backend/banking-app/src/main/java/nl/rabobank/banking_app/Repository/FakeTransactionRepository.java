@@ -28,4 +28,9 @@ public class FakeTransactionRepository implements TransactionRepository {
         }
         return null;
     }
+
+    @Override
+    public Transaction editCategory(final String transactionId, final String category) {
+        return null;
+    }
 }
