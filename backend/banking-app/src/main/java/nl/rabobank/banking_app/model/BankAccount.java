@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -17,6 +18,9 @@ public class BankAccount {
 
     @OneToMany(mappedBy = "fromBankAccount")
     List<Transaction> transactions;
+
+    @ManyToOne
+    private User accountOwner;
 
     public String getIban() {
         return iban;

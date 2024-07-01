@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import nl.rabobank.banking_app.Repository.TransactionRepository;
-import nl.rabobank.banking_app.model.BankAccount;
 import nl.rabobank.banking_app.model.PeriodBin;
 import nl.rabobank.banking_app.model.SpendingItem;
 import nl.rabobank.banking_app.model.Transaction;

@@ -1,5 +1,6 @@
 package nl.rabobank.banking_app.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -21,62 +22,64 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "to_iban")
     BankAccount toBankAccount;
-    int amountEuro;
-    int amountCent;
+    BigDecimal amount;
     String description;
     String category;
     LocalDateTime transactionDateTime;
 
-    public Transaction(BankAccount fromBankAccount, BankAccount toBankAccount, final int amountEuro, final int amountCent, final String description, LocalDateTime transactionDateTime) {
-        this.fromBankAccount = fromBankAccount;
-        this.toBankAccount = toBankAccount;
-        this.amountEuro = amountEuro;
-        this.amountCent = amountCent;
-        this.description = description;
-        this.transactionDateTime = transactionDateTime;
-    }
-
-    public Transaction() {
-    }
-
-    public void setTransactionId(Long transactionId) {
-        this.transactionId = transactionId;
-    }
-
     public Long getTransactionId() {
         return transactionId;
+    }
+
+    public void setTransactionId(final Long transactionId) {
+        this.transactionId = transactionId;
     }
 
     public BankAccount getFromBankAccount() {
         return fromBankAccount;
     }
 
+    public void setFromBankAccount(final BankAccount fromBankAccount) {
+        this.fromBankAccount = fromBankAccount;
+    }
+
     public BankAccount getToBankAccount() {
         return toBankAccount;
     }
 
-    public int getAmountEuro() {
-        return amountEuro;
+    public void setToBankAccount(final BankAccount toBankAccount) {
+        this.toBankAccount = toBankAccount;
     }
 
-    public int getAmountCent() {
-        return amountCent;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
+    public void setAmount(final BigDecimal amount) {
+        this.amount = amount;
+    }
 
     public String getDescription() {
         return description;
     }
 
-    public void setCategory(final String category) {
-        this.category = category;
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
     public String getCategory() {
         return category;
     }
 
+    public void setCategory(final String category) {
+        this.category = category;
+    }
+
     public LocalDateTime getTransactionDateTime() {
         return transactionDateTime;
+    }
+
+    public void setTransactionDateTime(final LocalDateTime transactionDateTime) {
+        this.transactionDateTime = transactionDateTime;
     }
 }
