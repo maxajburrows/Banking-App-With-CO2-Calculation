@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import nl.rabobank.banking_app.Repository.TransactionRepository;
+import nl.rabobank.banking_app.model.BankAccount;
 import nl.rabobank.banking_app.model.PeriodBin;
 import nl.rabobank.banking_app.model.SpendingItem;
 import nl.rabobank.banking_app.model.Transaction;
@@ -15,37 +16,33 @@ import org.springframework.stereotype.Service;
 @Service
 public class TransactionService {
     private final TransactionRepository transactionRepository;
+    private final BankAccountService bankAccountService;
     @Autowired
-    public TransactionService(TransactionRepository transactionRepository) {
+    public TransactionService(TransactionRepository transactionRepository, BankAccountService bankAccountService) {
         this.transactionRepository = transactionRepository;
+        this.bankAccountService = bankAccountService;
     }
 
     public List<Transaction> listAllTransactions() {
-        return transactionRepository.listAllTransactions();
+        return transactionRepository.findAll();
     }
 
-    public List<Transaction> listAllTransactionsByAccountNumber(String accountNumber) {
-        return transactionRepository.listAllTransactions().stream()
-                .filter(transaction -> transaction.getFromIban().equals(accountNumber) || transaction.getToIban().equals(accountNumber))
-                .toList();
+    public List<Transaction> listAllTransactionsByAccountNumber(String iban) {
+        return bankAccountService.getBankAccountByIban(iban).getTransactions();
     }
 
     public Transaction addTransaction(Transaction transaction) {
-        return transactionRepository.addTransaction(transaction);
+        return transactionRepository.save(transaction);
     }
 
-    public Transaction editCategory(String transactionId, String category) {
-        Transaction updatedTransaction = null;
-        for (Transaction transaction : transactionRepository.listAllTransactions()) {
-            if (transaction.getTransactionId().equals(transactionId)) {
-                updatedTransaction = transaction;
-                break;
-            }
-        }
-        if (updatedTransaction == null) {
+    public Transaction editCategory(Long transactionId, String category) {
+        Optional<Transaction> transactionToUpdateOptional = transactionRepository.findById(transactionId);
+        if (transactionToUpdateOptional.isEmpty()) {
             return null;
         }
-        return transactionRepository.editCategory(updatedTransaction, category);
+        Transaction transactionToUpdate = transactionToUpdateOptional.get();
+        transactionToUpdate.setCategory(category);
+        return transactionRepository.save(transactionToUpdate);
     }
 
     public List<SpendingItem> calculateSpending(String accountIBAN, Optional<LocalDateTime> startDate, Optional<LocalDateTime> endDate, Optional<PeriodBin> periodBin) {

@@ -5,6 +5,7 @@ import java.util.List;
 import nl.rabobank.banking_app.Service.TransactionService;
 import nl.rabobank.banking_app.model.Transaction;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/transactions")
 public class TransactionController {
     private TransactionService service;
+    @Autowired
     public TransactionController(TransactionService service) {
         this.service = service;
     }
@@ -36,7 +38,7 @@ public class TransactionController {
     }
 
     @PatchMapping("/{transactionId}")
-    public Transaction editCategory(@PathVariable String transactionId, @RequestBody String category) {
+    public Transaction editCategory(@PathVariable Long transactionId, @RequestBody String category) {
         return service.editCategory(transactionId, category);
     }
 }

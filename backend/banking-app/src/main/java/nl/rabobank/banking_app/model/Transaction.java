@@ -2,39 +2,57 @@ package nl.rabobank.banking_app.model;
 
 import java.time.LocalDateTime;
 
-public class Transaction {
-    private String transactionId;
-    private final String fromIban;
-    private final String toIban;
-    private final int amountEuro;
-    private final int amountCent;
-    private final String description;
-    private String category;
-    private final LocalDateTime transactionDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-    public Transaction(String transactionId, String fromIban, String toIban, final int amountEuro, final int amountCent, final String description, LocalDateTime transactionDateTime) {
-        this.fromIban = fromIban;
-        this.toIban = toIban;
+import nl.rabobank.banking_app.model.BankAccount;
+
+@Entity
+public class Transaction {
+    @Id
+    @GeneratedValue
+    private Long transactionId;
+    @ManyToOne
+    @JoinColumn(name = "from_iban")
+    BankAccount fromBankAccount;
+    @ManyToOne
+    @JoinColumn(name = "to_iban")
+    BankAccount toBankAccount;
+    int amountEuro;
+    int amountCent;
+    String description;
+    String category;
+    LocalDateTime transactionDateTime;
+
+    public Transaction(BankAccount fromBankAccount, BankAccount toBankAccount, final int amountEuro, final int amountCent, final String description, LocalDateTime transactionDateTime) {
+        this.fromBankAccount = fromBankAccount;
+        this.toBankAccount = toBankAccount;
         this.amountEuro = amountEuro;
         this.amountCent = amountCent;
         this.description = description;
         this.transactionDateTime = transactionDateTime;
     }
 
-    public void setTransactionId(String transactionId) {
+    public Transaction() {
+    }
+
+    public void setTransactionId(Long transactionId) {
         this.transactionId = transactionId;
     }
 
-    public String getTransactionId() {
+    public Long getTransactionId() {
         return transactionId;
     }
 
-    public String getFromIban() {
-        return fromIban;
+    public BankAccount getFromBankAccount() {
+        return fromBankAccount;
     }
 
-    public String getToIban() {
-        return toIban;
+    public BankAccount getToBankAccount() {
+        return toBankAccount;
     }
 
     public int getAmountEuro() {
