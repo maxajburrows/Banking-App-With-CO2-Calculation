@@ -3,34 +3,36 @@ package nl.rabobank.banking_app.model;
 import java.util.List;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 @Entity
-public class User {
+public class BankUser {
     @Id
-    @GeneratedValue
-    private Long id;
-    private String fisrtName;
+    private String userName;
+    private String firstName;
     private String lastName;
     @OneToMany(mappedBy = "accountOwner")
+    @JsonIgnore
     private List<BankAccount> bankAccounts;
 
-    public Long getId() {
-        return id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(final Long id) {
-        this.id = id;
+    public void setUserName(final String userName) {
+        this.userName = userName;
     }
 
-    public String getFisrtName() {
-        return fisrtName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFisrtName(final String fisrtName) {
-        this.fisrtName = fisrtName;
+    public void setFirstName(final String fisrtName) {
+        this.firstName = fisrtName;
     }
 
     public String getLastName() {

@@ -20,7 +20,7 @@ public class BankAccount {
     List<Transaction> transactions;
 
     @ManyToOne
-    private User accountOwner;
+    private BankUser accountOwner;
 
     public String getIban() {
         return iban;
@@ -28,5 +28,29 @@ public class BankAccount {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public void setIban(final String iban) {
+        this.iban = iban;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(final String accountName) {
+        this.accountName = accountName;
+    }
+
+    public void setTransactions(final List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public BankUser getAccountOwner() {
+        return accountOwner;
+    }
+
+    public void setAccountOwner(final BankUser accountOwner) {
+        this.accountOwner = accountOwner;
     }
 }
