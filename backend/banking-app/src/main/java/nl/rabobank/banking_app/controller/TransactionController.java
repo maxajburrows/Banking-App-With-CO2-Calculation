@@ -3,10 +3,9 @@ package nl.rabobank.banking_app.controller;
 import java.security.Principal;
 import java.util.List;
 
-import nl.rabobank.banking_app.Service.TransactionService;
+import nl.rabobank.banking_app.service.TransactionService;
 import nl.rabobank.banking_app.model.Transaction;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;

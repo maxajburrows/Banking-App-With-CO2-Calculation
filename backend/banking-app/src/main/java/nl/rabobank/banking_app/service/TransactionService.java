@@ -1,10 +1,10 @@
-package nl.rabobank.banking_app.Service;
+package nl.rabobank.banking_app.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import nl.rabobank.banking_app.Repository.TransactionRepository;
+import nl.rabobank.banking_app.repository.TransactionRepository;
 import nl.rabobank.banking_app.model.PeriodBin;
 import nl.rabobank.banking_app.model.SpendingItem;
 import nl.rabobank.banking_app.model.Transaction;

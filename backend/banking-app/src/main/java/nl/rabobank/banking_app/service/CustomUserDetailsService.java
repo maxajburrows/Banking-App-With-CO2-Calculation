@@ -1,8 +1,8 @@
-package nl.rabobank.banking_app.Service;
+package nl.rabobank.banking_app.service;
 
 import java.util.Optional;
 
-import nl.rabobank.banking_app.Repository.UserRepository;
+import nl.rabobank.banking_app.repository.UserRepository;
 import nl.rabobank.banking_app.model.BankUser;
 
 import org.springframework.security.core.userdetails.User;

@@ -2,10 +2,8 @@ package nl.rabobank.banking_app.controller;
 
 import java.util.List;
 
-import nl.rabobank.banking_app.Service.BankAccountService;
-import nl.rabobank.banking_app.Service.UserService;
+import nl.rabobank.banking_app.service.BankAccountService;
 import nl.rabobank.banking_app.model.BankAccount;
-import nl.rabobank.banking_app.model.BankUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
