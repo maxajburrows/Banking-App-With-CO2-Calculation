@@ -18,10 +18,10 @@ public class Transaction {
     private Long transactionId;
     @ManyToOne
     @JoinColumn(name = "from_iban")
-    BankAccount fromBankAccount;
+    String fromBankAccount;
     @ManyToOne
     @JoinColumn(name = "to_iban")
-    BankAccount toBankAccount;
+    String toBankAccount;
     BigDecimal amount;
     String description;
     String category;
@@ -30,7 +30,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(BankAccount fromBankAccount, BankAccount toBankAccount, BigDecimal amount, String description, String category, LocalDateTime transactionDateTime) {
+    public Transaction(String fromBankAccount, String toBankAccount, BigDecimal amount, String description, String category, LocalDateTime transactionDateTime) {
         this.fromBankAccount = fromBankAccount;
         this.toBankAccount = toBankAccount;
         this.amount = amount;
@@ -47,19 +47,19 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public BankAccount getFromBankAccount() {
+    public String getFromBankAccount() {
         return fromBankAccount;
     }
 
-    public void setFromBankAccount(final BankAccount fromBankAccount) {
+    public void setFromBankAccount(final String fromBankAccount) {
         this.fromBankAccount = fromBankAccount;
     }
 
-    public BankAccount getToBankAccount() {
+    public String getToBankAccount() {
         return toBankAccount;
     }
 
-    public void setToBankAccount(final BankAccount toBankAccount) {
+    public void setToBankAccount(final String toBankAccount) {
         this.toBankAccount = toBankAccount;
     }
 
