@@ -15,6 +15,8 @@ public class BankUser {
     private String userName;
     private String firstName;
     private String lastName;
+    private String password;
+
     @OneToMany(mappedBy = "accountOwner")
     @JsonIgnore
     private List<BankAccount> bankAccounts;
@@ -41,6 +43,10 @@ public class BankUser {
 
     public void setLastName(final String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public List<BankAccount> getBankAccounts() {
