@@ -27,6 +27,18 @@ public class Transaction {
     String category;
     LocalDateTime transactionDateTime;
 
+    public Transaction() {
+    }
+
+    public Transaction(BankAccount fromBankAccount, BankAccount toBankAccount, BigDecimal amount, String description, String category, LocalDateTime transactionDateTime) {
+        this.fromBankAccount = fromBankAccount;
+        this.toBankAccount = toBankAccount;
+        this.amount = amount;
+        this.description = description;
+        this.category = category;
+        this.transactionDateTime = transactionDateTime;
+    }
+
     public Long getTransactionId() {
         return transactionId;
     }

@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 
 import nl.rabobank.banking_app.model.BankAccount;
 import nl.rabobank.banking_app.model.BankUser;
+import nl.rabobank.banking_app.model.Transaction;
 import nl.rabobank.banking_app.repository.BankAccountRepository;
 import nl.rabobank.banking_app.repository.TransactionRepository;
 import nl.rabobank.banking_app.repository.UserRepository;
@@ -56,5 +57,7 @@ public class DatabaseSeeder {
     }
 
     private void createTransactions() {
+        // TODO: Generate many many transactions
+       // Transaction transaction1 = new Transaction("NL01RABO1234567890", "NL02ABNA1234567890", 100.0, "EUR", "Test transaction", max);
     }
 }
