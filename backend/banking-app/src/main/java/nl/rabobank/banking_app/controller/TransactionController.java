@@ -1,5 +1,6 @@
 package nl.rabobank.banking_app.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import nl.rabobank.banking_app.Service.TransactionService;
@@ -22,7 +23,8 @@ public class TransactionController {
         this.service = service;
     }
     @GetMapping
-    public List<Transaction> getAllTransactions() {
+    public List<Transaction> getAllTransactions(Principal principal) {
+        System.out.println(principal.getName());
         return service.listAllTransactions();
     }
 
