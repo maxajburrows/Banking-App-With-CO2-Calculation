@@ -1,5 +1,7 @@
 package nl.rabobank.banking_app.service;
 
+import java.util.List;
+
 import nl.rabobank.banking_app.repository.UserRepository;
 import nl.rabobank.banking_app.model.BankUser;
 
@@ -19,5 +21,9 @@ public class UserService {
 
     public BankUser createUser(final BankUser user) {
         return userRepository.save(user);
+    }
+
+    public List<BankUser> getAllUsers() {
+        return userRepository.findAll();
     }
 }

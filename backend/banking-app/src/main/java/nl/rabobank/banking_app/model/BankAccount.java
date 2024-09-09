@@ -14,13 +14,25 @@ public class BankAccount {
     @Column(length = 34)
     private String iban;
 
+    @Column(nullable = false)
     private String accountName;
 
+//    @Column(nullable = false)
     @OneToMany(mappedBy = "fromBankAccount")
     List<Transaction> transactions;
 
+//    @Column(nullable = false)
     @ManyToOne
     private BankUser accountOwner;
+
+    public BankAccount() {
+    }
+
+    public BankAccount(String iban, String accountName, BankUser accountOwner) {
+        this.iban = iban;
+        this.accountName = accountName;
+        this.accountOwner = accountOwner;
+    }
 
     public String getIban() {
         return iban;

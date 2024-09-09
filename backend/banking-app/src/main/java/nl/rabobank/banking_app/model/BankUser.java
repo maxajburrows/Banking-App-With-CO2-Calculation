@@ -2,24 +2,39 @@ package nl.rabobank.banking_app.model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @Entity
 public class BankUser {
     @Id
     private String userName;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
+    @Column(nullable = false)
+    @JsonIgnore // Could define data transfer object to do this. If more changes required do it this way.
     private String password;
 
     @OneToMany(mappedBy = "accountOwner")
     @JsonIgnore
+    //@Column(nullable = false)
     private List<BankAccount> bankAccounts;
+
+    public BankUser() {
+    }
+
+    public BankUser(String userName, String firstName, String lastName, String password) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+    }
 
     public String getUserName() {
         return userName;
@@ -53,7 +68,7 @@ public class BankUser {
         return bankAccounts;
     }
 
-    public void setBankAccounts(final List<BankAccount> bankAccounts) {
+    public void setBankAccounts(List<BankAccount> bankAccounts) {
         this.bankAccounts = bankAccounts;
     }
 }

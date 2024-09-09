@@ -24,32 +24,28 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-//        CsrfTokenRequestHandler requestHandler = (HttpServletRequest request, HttpServletResponse response, Supplier<CsrfToken> deferredCsrfToken) -> {
-//            deferredCsrfToken.get();
-//            new XorCsrfTokenRequestAttributeHandler().handle(request, response, deferredCsrfToken);
-//        };
         return http
+         //   .cors(withDefaults())
             .authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
             .httpBasic(withDefaults())
             .userDetailsService(userDetailsService)
             .build();
     }
 
-    @Bean
-    UserDetailsService users() {
-        UserDetails max = User
-            .withUsername("max@gmail.com")
-            .password(passwordEncoder().encode("a123456"))
-            .roles("USER", "ADMIN")
-            .build();
-        UserDetails bob = User
-            .withUsername("bob@gmail.com")
-            .password(passwordEncoder().encode("b123456"))
-            .roles("USER")
-            .build();
-        return new InMemoryUserDetailsManager(max, bob);
-    }
+//    @Bean
+//    UserDetailsService users() {
+//        UserDetails max = User
+//            .withUsername("max@gmail.com")
+//            .password(passwordEncoder().encode("a123456"))
+//            .roles("USER", "ADMIN")
+//            .build();
+//        UserDetails bob = User
+//            .withUsername("bob@gmail.com")
+//            .password(passwordEncoder().encode("b123456"))
+//            .roles("USER")
+//            .build();
+//        return new InMemoryUserDetailsManager(max, bob);
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
