@@ -45,7 +45,14 @@ public class DatabaseSeeder {
 
     private void createBankAccounts() {
         BankAccount maxAccount1 = new BankAccount("NL01RABO1234567890", "Max's savings", max);
+        bankAccountRepository.save(maxAccount1);
         BankAccount maxAccount2 = new BankAccount("NL02ABNA1234567890", "Max's current", max);
+        bankAccountRepository.save(maxAccount2);
+
+        BankAccount bobAccount1 = new BankAccount("NL03INGB1234567890", "Bob's savings", bob);
+        bankAccountRepository.save(bobAccount1);
+        BankAccount bobAccount2 = new BankAccount("NL04RABO1234567890", "Bob's current", bob);
+        bankAccountRepository.save(bobAccount2);
     }
 
     private void createTransactions() {
