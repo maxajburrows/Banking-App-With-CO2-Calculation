@@ -6,6 +6,7 @@ function Accounts() {
     const [accounts, setAccounts] = useState<Account[]>([]);
 
     async function fetchAccountData() {
+        // Use axios for fetching data
         const response = await fetch("http://localhost:8080/accounts");
         if (!response.ok) {
             throw Error("Can't get accounts")
