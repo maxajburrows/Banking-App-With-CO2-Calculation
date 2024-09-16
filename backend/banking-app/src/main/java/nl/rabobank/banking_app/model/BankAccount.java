@@ -18,11 +18,8 @@ public class BankAccount {
     private String accountName;
 
 //    @Column(nullable = false)
-    @OneToMany(mappedBy = "fromBankAccount")
-    List<Transaction> sentTransactions;
-
-    @OneToMany(mappedBy = "toBankAccount")
-    List<Transaction> receivedTransactions;
+    @OneToMany(mappedBy = "transactionOwner")
+    List<Transaction> transactions;
 
 //    @Column(nullable = false)
     @ManyToOne
@@ -41,8 +38,8 @@ public class BankAccount {
         return iban;
     }
 
-    public List<Transaction> getSentTransactions() {
-        return sentTransactions;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
     public void setIban(final String iban) {
@@ -57,8 +54,8 @@ public class BankAccount {
         this.accountName = accountName;
     }
 
-    public void setSentTransactions(final List<Transaction> sentTransactions) {
-        this.sentTransactions = sentTransactions;
+    public void setTransactions(final List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 
     public BankUser getAccountOwner() {

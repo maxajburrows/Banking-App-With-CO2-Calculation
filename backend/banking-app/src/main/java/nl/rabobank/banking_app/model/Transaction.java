@@ -15,12 +15,10 @@ public class Transaction {
     @GeneratedValue
     private Long transactionId;
     @ManyToOne
-    @JoinColumn(name = "from_iban")
-    BankAccount fromBankAccount;
-    // Remove two lists and have one account ownership
-    @ManyToOne
-    @JoinColumn(name = "to_iban")
-    BankAccount toBankAccount;
+    @JoinColumn(name = "account_owner")
+    BankAccount transactionOwner;
+    String toBankAccount;
+    TransactionType transactionType;
     BigDecimal amount;
     String description;
     String category;
@@ -29,9 +27,10 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(BankAccount fromBankAccount, BankAccount toBankAccount, BigDecimal amount, String description, String category, LocalDateTime transactionDateTime) {
-        this.fromBankAccount = fromBankAccount;
+    public Transaction(BankAccount transactionOwner, String toBankAccount, TransactionType transactionType, BigDecimal amount, String description, String category, LocalDateTime transactionDateTime) {
+        this.transactionOwner = transactionOwner;
         this.toBankAccount = toBankAccount;
+        this.transactionType = transactionType;
         this.amount = amount;
         this.description = description;
         this.category = category;
@@ -46,19 +45,19 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public BankAccount getFromBankAccount() {
-        return fromBankAccount;
+    public BankAccount getTransactionOwner() {
+        return transactionOwner;
     }
 
-    public void setFromBankAccount(final BankAccount fromBankAccount) {
-        this.fromBankAccount = fromBankAccount;
+    public void setTransactionOwner(final BankAccount transactionOwner) {
+        this.transactionOwner = transactionOwner;
     }
 
-    public BankAccount getToBankAccount() {
+    public String getToBankAccount() {
         return toBankAccount;
     }
 
-    public void setToBankAccount(final BankAccount toBankAccount) {
+    public void setToBankAccount(final String toBankAccount) {
         this.toBankAccount = toBankAccount;
     }
 
