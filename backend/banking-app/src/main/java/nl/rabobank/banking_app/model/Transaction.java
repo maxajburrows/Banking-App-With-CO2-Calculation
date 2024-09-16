@@ -17,6 +17,7 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "from_iban")
     BankAccount fromBankAccount;
+    // Remove two lists and have one account ownership
     @ManyToOne
     @JoinColumn(name = "to_iban")
     BankAccount toBankAccount;

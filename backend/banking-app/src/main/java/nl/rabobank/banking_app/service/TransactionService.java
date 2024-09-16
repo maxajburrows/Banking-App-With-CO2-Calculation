@@ -27,7 +27,7 @@ public class TransactionService {
     }
 
     public List<Transaction> listAllTransactionsByAccountNumber(String iban) {
-        return bankAccountService.getBankAccountByIban(iban).getTransactions();
+        return bankAccountService.getBankAccountByIban(iban).getSentTransactions();
     }
 
     public Transaction addTransaction(Transaction transaction) {
