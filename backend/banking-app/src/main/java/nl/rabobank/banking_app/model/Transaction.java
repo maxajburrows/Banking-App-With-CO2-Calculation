@@ -9,8 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-import nl.rabobank.banking_app.model.BankAccount;
-
 @Entity
 public class Transaction {
     @Id
@@ -18,10 +16,10 @@ public class Transaction {
     private Long transactionId;
     @ManyToOne
     @JoinColumn(name = "from_iban")
-    String fromBankAccount;
+    BankAccount fromBankAccount;
     @ManyToOne
     @JoinColumn(name = "to_iban")
-    String toBankAccount;
+    BankAccount toBankAccount;
     BigDecimal amount;
     String description;
     String category;
@@ -30,7 +28,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(String fromBankAccount, String toBankAccount, BigDecimal amount, String description, String category, LocalDateTime transactionDateTime) {
+    public Transaction(BankAccount fromBankAccount, BankAccount toBankAccount, BigDecimal amount, String description, String category, LocalDateTime transactionDateTime) {
         this.fromBankAccount = fromBankAccount;
         this.toBankAccount = toBankAccount;
         this.amount = amount;
@@ -47,19 +45,19 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public String getFromBankAccount() {
+    public BankAccount getFromBankAccount() {
         return fromBankAccount;
     }
 
-    public void setFromBankAccount(final String fromBankAccount) {
+    public void setFromBankAccount(final BankAccount fromBankAccount) {
         this.fromBankAccount = fromBankAccount;
     }
 
-    public String getToBankAccount() {
+    public BankAccount getToBankAccount() {
         return toBankAccount;
     }
 
-    public void setToBankAccount(final String toBankAccount) {
+    public void setToBankAccount(final BankAccount toBankAccount) {
         this.toBankAccount = toBankAccount;
     }
 
