@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import jakarta.annotation.PostConstruct;
 
@@ -63,39 +64,42 @@ public class DatabaseSeeder {
         BankAccount janetCurrentAccount = new BankAccount("NL06RABO1234567890", "Janet's current", bankUsers.getLast());
         bankAccountRepository.save(janetCurrentAccount);
 
-        List<BankAccount> bankAccounts = Arrays.asList(maxSavingsAccount, maxCurrentAccount, bobSavingsAccount, bobCurrentAccount, janetSavingsAccount, janetCurrentAccount);
-        createTransactions(bankAccounts);
+        List<BankAccount> currentAccounts = Arrays.asList(maxCurrentAccount, bobCurrentAccount, janetCurrentAccount);
+        List<BankAccount> savingsAccounts = Arrays.asList(maxSavingsAccount, bobSavingsAccount, janetSavingsAccount);
+        createTransactions(currentAccounts, savingsAccounts);
     }
 
-    private void createTransactions(List<BankAccount> bankAccounts) {
-        Transaction maxToBob1a = new Transaction(bankAccounts.get(0), bankAccounts.get(2).getIban(), TransactionType.SENT, new BigDecimal("100.00"), "Rent", "Housing", LocalDateTime.now());
-        Transaction maxToBob1b = new Transaction(bankAccounts.get(2), bankAccounts.get(0).getIban(), TransactionType.RECEIVED, new BigDecimal("100.00"), "Rent", "Housing", LocalDateTime.now());
-        transactionRepository.save(maxToBob1a);
-        transactionRepository.save(maxToBob1b);
+    private void createTransactions(List<BankAccount> currentAccounts, List<BankAccount> savingsAccounts) {
+        Random random = new Random();
+        List<String> categories = Arrays.asList("Groceries", "Rent", "Salary", "Gift", "Other");
+        for (int i = 0; i < currentAccounts.size(); i++) {
+            // TODO: Can this be done with enhanced for loop?
+            for (int j = 0; j < savingsAccounts.size(); j++) {
+                if (i == j) continue;
+                String category = categories.get(random.nextInt(categories.size()));
+                createAndSaveTransactions(currentAccounts.get(i), savingsAccounts.get(j), BigDecimal.valueOf(random.nextDouble(100)), category, category);
+            }
+        }
+        for (int i = 0; i < currentAccounts.size(); i++) {
+            for (int j = 0; j < currentAccounts.size(); j++) {
+                if (i == j) continue;
+                // TODO: Is there category duplication?
+                String category = categories.get(random.nextInt(categories.size()));
+                createAndSaveTransactions(currentAccounts.get(j), currentAccounts.get(i), BigDecimal.valueOf(random.nextDouble(100)), category, category);
+            }
+        }
+        for (int i = 0; i < currentAccounts.size(); i++) {
+            for (int j = 0; j < 10; j++) {
+                createAndSaveTransactions(currentAccounts.get(i), savingsAccounts.get(i), BigDecimal.valueOf(random.nextInt(100)), "Savings", "Savings");
+                createAndSaveTransactions(savingsAccounts.get(i), currentAccounts.get(i), BigDecimal.valueOf(random.nextInt(100)), "Emergency withdrawal", "Withdrawal");
+            }
+        }
+    }
 
-        Transaction bobToMax1a = new Transaction(bankAccounts.get(2), bankAccounts.get(0).getIban(), TransactionType.SENT, new BigDecimal("50.00"), "Salary", "Income", LocalDateTime.now());
-        Transaction bobToMax1b = new Transaction(bankAccounts.get(0), bankAccounts.get(2).getIban(), TransactionType.RECEIVED, new BigDecimal("50.00"), "Salary", "Income", LocalDateTime.now());
-        transactionRepository.save(bobToMax1a);
-        transactionRepository.save(bobToMax1b);
-
-        Transaction bobToJanet1a = new Transaction(bankAccounts.get(2), bankAccounts.get(4).getIban(), TransactionType.SENT, new BigDecimal("25.00"), "Gift", "Gift", LocalDateTime.now());
-        Transaction bobToJanet1b = new Transaction(bankAccounts.get(4), bankAccounts.get(2).getIban(), TransactionType.RECEIVED, new BigDecimal("25.00"), "Gift", "Gift", LocalDateTime.now());
-        transactionRepository.save(bobToJanet1a);
-        transactionRepository.save(bobToJanet1b);
-
-        Transaction janetToBob1a = new Transaction(bankAccounts.get(4), bankAccounts.get(2).getIban(), TransactionType.SENT, new BigDecimal("9.50"), "Gift", "Gift", LocalDateTime.now());
-        Transaction janetToBob1b = new Transaction(bankAccounts.get(2), bankAccounts.get(4).getIban(), TransactionType.RECEIVED, new BigDecimal("9.50"), "Gift", "Gift", LocalDateTime.now());
-        transactionRepository.save(janetToBob1a);
-        transactionRepository.save(janetToBob1b);
-
-        Transaction janetToMax1a = new Transaction(bankAccounts.get(4), bankAccounts.get(0).getIban(), TransactionType.SENT, new BigDecimal("15.00"), "Gift", "Gift", LocalDateTime.now());
-        Transaction janetToMax1b = new Transaction(bankAccounts.get(0), bankAccounts.get(4).getIban(), TransactionType.RECEIVED, new BigDecimal("15.00"), "Gift", "Gift", LocalDateTime.now());
-        transactionRepository.save(janetToMax1a);
-        transactionRepository.save(janetToMax1b);
-
-        Transaction maxToJanet1a = new Transaction(bankAccounts.get(0), bankAccounts.get(4).getIban(), TransactionType.SENT, new BigDecimal("10.00"), "Gift", "Gift", LocalDateTime.now());
-        Transaction maxToJanet1b = new Transaction(bankAccounts.get(4), bankAccounts.get(0).getIban(), TransactionType.RECEIVED, new BigDecimal("10.00"), "Gift", "Gift", LocalDateTime.now());
-        transactionRepository.save(maxToJanet1a);
-        transactionRepository.save(maxToJanet1b);
+    private void createAndSaveTransactions(BankAccount fromAccount, BankAccount toAccount, BigDecimal amount, String description, String category) {
+        Transaction sentTransaction = new Transaction(fromAccount, toAccount.getIban(), TransactionType.SENT, amount, description, category, LocalDateTime.now());
+        Transaction receivedTransaction = new Transaction(toAccount, fromAccount.getIban(), TransactionType.RECEIVED, amount, description, category, LocalDateTime.now());
+        transactionRepository.save(sentTransaction);
+        transactionRepository.save(receivedTransaction);
     }
 }
