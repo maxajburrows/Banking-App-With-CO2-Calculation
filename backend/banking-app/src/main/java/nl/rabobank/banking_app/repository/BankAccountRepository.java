@@ -1,5 +1,7 @@
 package nl.rabobank.banking_app.repository;
 
+import java.util.List;
+
 import nl.rabobank.banking_app.model.BankAccount;
 
 import org.springframework.data.jpa.repository.JpaRepository;

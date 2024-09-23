@@ -2,8 +2,9 @@ import {Account} from "./Account.ts";
 
 export type Transaction = {
     transactionId: number;
-    fromBankAccount: Account;
-    toBankAccount: Account;
+    transactionOwner: Account;
+    toBankAccount: string;
+    transactionType: string;
     amount: number;
     description: string;
     category: string;

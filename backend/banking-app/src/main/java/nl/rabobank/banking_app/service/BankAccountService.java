@@ -28,7 +28,7 @@ public class BankAccountService {
     }
 
     public BankAccount createBankAccount(BankAccount newBankAccount, String currentUserName) {
-        BankUser currentUser = userService.getUserByUserName(currentUserName);
+        BankUser currentUser = userService.getUserByUsername(currentUserName);
         newBankAccount.setAccountOwner(currentUser);
         return repo.save(newBankAccount);
     }

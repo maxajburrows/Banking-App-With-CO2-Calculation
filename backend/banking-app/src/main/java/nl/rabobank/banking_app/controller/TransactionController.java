@@ -6,6 +6,7 @@ import java.util.List;
 import nl.rabobank.banking_app.service.TransactionService;
 import nl.rabobank.banking_app.model.Transaction;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/transactions")
+@CrossOrigin("*")
 public class TransactionController {
     private TransactionService service;
     public TransactionController(TransactionService service) {

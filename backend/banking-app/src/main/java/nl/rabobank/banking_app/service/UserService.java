@@ -15,7 +15,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public BankUser getUserByUserName(String userName) {
+    public BankUser getUserByUsername(String userName) {
         return userRepository.findById(userName).orElse(null); // TODO: Throw exception not return null.
     }
 
