@@ -10,16 +10,15 @@ function Login() {
         e.preventDefault();
     }
 
-    return
+    return (
         <form onSubmit={handleLogin}>
-            <label htmlFor="username">Password</label>
+            <label htmlFor="username">Username</label>
             <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-
-
-
-
+            <label htmlFor="password">Password</label>
+            <input type="text" id="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <button type="submit">LOG IN</button>
         </form>
-    ;
+    );
 }
 
 export default Login;

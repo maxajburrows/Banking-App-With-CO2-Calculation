@@ -35,21 +35,6 @@ public class SecurityConfiguration {
             .build();
     }
 
-//    @Bean
-//    UserDetailsService users() {
-//        UserDetails max = User
-//            .withUsername("max@gmail.com")
-//            .password(passwordEncoder().encode("a123456"))
-//            .roles("USER", "ADMIN")
-//            .build();
-//        UserDetails bob = User
-//            .withUsername("bob@gmail.com")
-//            .password(passwordEncoder().encode("b123456"))
-//            .roles("USER")
-//            .build();
-//        return new InMemoryUserDetailsManager(max, bob);
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

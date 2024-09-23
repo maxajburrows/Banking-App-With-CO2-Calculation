@@ -1,6 +1,7 @@
 import Accounts from "./Accounts.tsx";
-import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Transactions from "./Transactions.tsx";
+import Login from "./Login.tsx";
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
         <Routes>
           <Route
               path="/"
-              element={<Navigate to="/accounts"/>}/>
+              element={<Login />} />
           <Route
               path="/accounts"
               element={<Accounts />} />
