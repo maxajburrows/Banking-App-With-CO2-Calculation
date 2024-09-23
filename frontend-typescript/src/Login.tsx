@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+import { useNavigate } from "react-router-dom";
 import React, {useState} from "react";
 
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -12,6 +14,7 @@ function Login() {
         const requestHeaders : object = { "Authorization": `Basic ${encodedCredentials}` };
         try {
             const response = await axios.get("http://localhost:8080/accounts", { headers: requestHeaders });
+            navigate("/accounts");
             console.log("Successfully logged in");
         } catch (e) {
             console.error(e);
