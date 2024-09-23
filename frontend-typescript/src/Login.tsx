@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 import React, {useState} from "react";
 
@@ -8,6 +8,15 @@ function Login() {
 
     async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        const encodedCredentials : string = btoa(`${username}:${password}`);
+        const requestHeaders : object = { "Authorization": `Basic ${encodedCredentials}` };
+        try {
+            const response = await axios.get("http://localhost:8080/accounts", { headers: requestHeaders });
+            console.log("Successfully logged in");
+        } catch (e) {
+            console.error(e);
+            console.log("Incorrect username or password");
+        }
     }
 
     return (
