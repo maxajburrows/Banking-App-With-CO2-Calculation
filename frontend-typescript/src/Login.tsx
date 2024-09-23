@@ -13,8 +13,12 @@ function Login() {
         const encodedCredentials : string = btoa(`${username}:${password}`);
         const requestHeaders : object = { "Authorization": `Basic ${encodedCredentials}` };
         try {
-            const response = await axios.get("http://localhost:8080/accounts", { headers: requestHeaders });
+            await axios.get("http://localhost:8080/accounts", { headers: requestHeaders });
             navigate("/accounts");
+            localStorage.setItem("username", username);
+            localStorage.setItem("password", password);
+            const retrievedUsername =  localStorage.getItem("username");
+            console.log(retrievedUsername)
             console.log("Successfully logged in");
         } catch (e) {
             console.error(e);
