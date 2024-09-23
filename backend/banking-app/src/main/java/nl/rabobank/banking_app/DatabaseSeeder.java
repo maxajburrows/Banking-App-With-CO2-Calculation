@@ -83,7 +83,6 @@ public class DatabaseSeeder {
         for (int i = 0; i < currentAccounts.size(); i++) {
             for (int j = 0; j < currentAccounts.size(); j++) {
                 if (i == j) continue;
-                // TODO: Is there category duplication?
                 String category = categories.get(random.nextInt(categories.size()));
                 createAndSaveTransactions(currentAccounts.get(j), currentAccounts.get(i), BigDecimal.valueOf(random.nextDouble(100)), category, category);
             }
