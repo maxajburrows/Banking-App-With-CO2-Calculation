@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Transaction {
     @Id
@@ -16,6 +18,7 @@ public class Transaction {
     private Long transactionId;
     @ManyToOne
     @JoinColumn(name = "account_owner")
+    @JsonIgnore
     BankAccount transactionOwner;
     String toBankAccount;
     TransactionType transactionType;

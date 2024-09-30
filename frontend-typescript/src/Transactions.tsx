@@ -35,8 +35,9 @@ function Transactions() {
             <h1>Transactions</h1>
             {transactions.map((transaction) => (
                 <button type="button" className="btn btn-outline-dark btn-lg btn-block">
-                    <h2>{transaction.amount}</h2>
-                    <p>{transaction.transactionId}</p>
+                    <p>{transaction.toBankAccount}</p>
+                    <p>{transaction.transactionType}</p>
+                    <p>{transaction.amount}</p>
                 </button>
             ))}
         </div>
