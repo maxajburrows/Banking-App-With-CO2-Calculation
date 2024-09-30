@@ -6,7 +6,6 @@ import nl.rabobank.banking_app.service.BankAccountService;
 import nl.rabobank.banking_app.model.BankAccount;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/accounts")
-@CrossOrigin("*")
 public class BankAccountController {
     private BankAccountService bankAccountService;
     private String currentUserName;
