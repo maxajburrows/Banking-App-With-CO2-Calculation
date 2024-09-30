@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/transactions")
-@CrossOrigin("*")
 public class TransactionController {
     private TransactionService service;
     public TransactionController(TransactionService service) {
