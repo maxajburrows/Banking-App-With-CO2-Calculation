@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -21,9 +22,7 @@ public class BankUser {
     @JsonIgnore // Could define data transfer object to do this. If more changes required do it this way.
     private String password;
 
-    @OneToMany(mappedBy = "accountOwner")
-    @JsonIgnore
-    //@Column(nullable = false)
+    @OneToMany(mappedBy = "accountOwner", fetch = FetchType.EAGER)
     private List<BankAccount> bankAccounts;
 
     public BankUser() {

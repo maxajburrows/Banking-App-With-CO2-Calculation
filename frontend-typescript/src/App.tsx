@@ -13,7 +13,7 @@ function App() {
           <Route
               path="/accounts"
               element={<Homepage />} />
-          <Route path="/accounts/:iban/transactions"
+          <Route path="/accounts/:iban"
                  element={<Transactions />} />
         </Routes>
       </Router>

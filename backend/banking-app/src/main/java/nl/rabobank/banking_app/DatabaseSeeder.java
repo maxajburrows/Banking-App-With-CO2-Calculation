@@ -55,8 +55,10 @@ public class DatabaseSeeder {
         bankAccountRepository.save(maxCurrentAccount);
 
         BankAccount bobSavingsAccount = new BankAccount("NL03INGB1234567890", "Bob's savings", bankUsers.get(1));
+        System.out.println(bankUsers.get(1).getUserName());
         bankAccountRepository.save(bobSavingsAccount);
         BankAccount bobCurrentAccount = new BankAccount("NL04RABO1234567890", "Bob's current", bankUsers.get(1));
+        System.out.println(bankUsers.get(1).getUserName());
         bankAccountRepository.save(bobCurrentAccount);
 
         BankAccount janetSavingsAccount = new BankAccount("NL05ABNA1234567890", "Janet's savings", bankUsers.getLast());

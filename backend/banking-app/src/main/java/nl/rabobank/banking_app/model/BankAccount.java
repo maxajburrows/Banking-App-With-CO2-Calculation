@@ -4,9 +4,12 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class BankAccount {
@@ -19,10 +22,12 @@ public class BankAccount {
 
 //    @Column(nullable = false)
     @OneToMany(mappedBy = "transactionOwner")
+    @JsonIgnore
     List<Transaction> transactions;
 
 //    @Column(nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private BankUser accountOwner;
 
     public BankAccount() {

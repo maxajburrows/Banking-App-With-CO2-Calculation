@@ -3,7 +3,7 @@
 function Transactions() {
     return (
         <div>
-            Transactions
+            <h1>Transactions</h1>
         </div>
     )
 }

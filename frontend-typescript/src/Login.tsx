@@ -12,7 +12,7 @@ function Login() {
     async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const encodedCredentials : string = btoa(`${username}:${password}`);
-        const requestUrl : string = "http://localhost:8080/users";
+        const requestUrl : string = "http://localhost:8080/accounts";
         const requestHeaders : object = { "Authorization": `Basic ${encodedCredentials}` };
         try {
             await axios.get(requestUrl, { headers: requestHeaders });
