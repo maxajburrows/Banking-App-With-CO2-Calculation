@@ -40,6 +40,10 @@ public class Transaction {
         this.transactionDateTime = transactionDateTime;
     }
 
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
     public Long getTransactionId() {
         return transactionId;
     }
