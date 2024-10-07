@@ -9,7 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import nl.rabobank.banking_app.dto.NewTransaction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jdk.jfr.Category;
 
 @Entity
 public class Transaction {
@@ -38,6 +42,16 @@ public class Transaction {
         this.description = description;
         this.category = category;
         this.transactionDateTime = transactionDateTime;
+    }
+
+    public Transaction(NewTransaction newTransaction, String category) {
+        this.transactionOwner = newTransaction.transactionOwner();
+        this.toBankAccount = newTransaction.toBankAccount();
+        this.transactionType = TransactionType.SENT;
+        this.amount = new BigDecimal(newTransaction.amount());
+        this.description = newTransaction.description();
+        this.category = category;
+        this.transactionDateTime = LocalDateTime.now();
     }
 
     public TransactionType getTransactionType() {

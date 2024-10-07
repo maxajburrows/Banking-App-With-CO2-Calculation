@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import nl.rabobank.banking_app.dto.NewTransaction;
 import nl.rabobank.banking_app.repository.TransactionRepository;
 import nl.rabobank.banking_app.model.PeriodBin;
 import nl.rabobank.banking_app.model.SpendingItem;
@@ -30,8 +31,9 @@ public class TransactionService {
         return bankAccountService.getBankAccountByIban(iban).getTransactions();
     }
 
-    public Transaction addTransaction(Transaction transaction) {
-        return transactionRepository.save(transaction);
+    public Transaction addTransaction(NewTransaction transaction) {
+        Transaction fullTransaction = new Transaction(transaction, "Groceries always"); // TODO: Implement catogorisation
+        return transactionRepository.save(fullTransaction);
     }
 
     public Transaction editCategory(Long transactionId, String category) {
