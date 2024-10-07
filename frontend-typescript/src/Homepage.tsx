@@ -45,6 +45,7 @@ function Homepage() {
               <button type="button" className="btn btn-outline-dark btn-lg btn-block" onClick={() => goToAccount(account.iban)}>
                   <h2>{account.accountName}</h2>
                   <p>{account.iban}</p>
+                  <p>€{account.balance}</p>
               </button>
           ))}
       </>

@@ -1,6 +1,7 @@
 package nl.rabobank.banking_app.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -21,16 +22,27 @@ public class BankAccount {
     @Column(nullable = false)
     private String accountName;
 
-//    @Column(nullable = false)
+    //    @Column(nullable = false)
     @OneToMany(mappedBy = "transactionOwner")
     @JsonIgnore
     List<Transaction> transactions;
 
-//    @Column(nullable = false)
+    public BigDecimal getBalance() {
+        BigDecimal balance = BigDecimal.ZERO;
+        for (Transaction transaction : transactions) {
+            if (transaction.getTransactionType() == TransactionType.RECEIVED) {
+                balance = balance.add(transaction.getAmount());
+                continue;
+            }
+            balance = balance.subtract(transaction.getAmount());
+        }
+        return balance;
+    }
+
+    //    @Column(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private BankUser accountOwner;
-    private BigDecimal balance;
 
     public BankAccount() {
     }
@@ -39,18 +51,7 @@ public class BankAccount {
         this.iban = iban;
         this.accountName = accountName;
         this.accountOwner = accountOwner;
-        calculateBalance();
-    }
-
-    public void calculateBalance() {
-        balance = BigDecimal.ZERO;
-        for (Transaction transaction : transactions) {
-            if (transaction.getTransactionType() == TransactionType.RECEIVED) {
-                balance = balance.add(transaction.getAmount());
-                continue;
-            }
-            balance = balance.subtract(transaction.getAmount());
-        }
+        this.transactions = new ArrayList<>();
     }
 
     public String getIban() {

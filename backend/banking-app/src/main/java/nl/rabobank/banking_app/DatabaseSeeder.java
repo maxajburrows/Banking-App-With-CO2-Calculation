@@ -95,6 +95,9 @@ public class DatabaseSeeder {
                 createAndSaveTransactions(savingsAccounts.get(i), currentAccounts.get(i), BigDecimal.valueOf(random.nextInt(100)), "Emergency withdrawal", "Withdrawal");
             }
         }
+
+//        calculateBalances(currentAccounts);
+//        calculateBalances(savingsAccounts);
     }
 
     private void createAndSaveTransactions(BankAccount fromAccount, BankAccount toAccount, BigDecimal amount, String description, String category) {
@@ -103,4 +106,11 @@ public class DatabaseSeeder {
         transactionRepository.save(sentTransaction);
         transactionRepository.save(receivedTransaction);
     }
+
+//    private void calculateBalances(List<BankAccount> bankAccounts) {
+//        for (BankAccount bankAccount : bankAccounts) {
+//            bankAccount.calculateBalance();
+//            bankAccountRepository.save(bankAccount);
+//        }
+//    }
 }
