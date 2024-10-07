@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import nl.rabobank.banking_app.dto.NewTransaction;
+import nl.rabobank.banking_app.model.BankAccount;
 import nl.rabobank.banking_app.repository.TransactionRepository;
 import nl.rabobank.banking_app.model.PeriodBin;
 import nl.rabobank.banking_app.model.SpendingItem;
@@ -32,7 +33,8 @@ public class TransactionService {
     }
 
     public Transaction addTransaction(NewTransaction transaction) {
-        Transaction fullTransaction = new Transaction(transaction, "Groceries always"); // TODO: Implement catogorisation
+        BankAccount transactionAccount = bankAccountService.getBankAccountByIban(transaction.transactionOwner());
+        Transaction fullTransaction = new Transaction(transaction, transactionAccount, "Groceries always"); // TODO: Implement catogorisation
         return transactionRepository.save(fullTransaction);
     }
 

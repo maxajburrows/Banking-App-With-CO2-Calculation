@@ -44,8 +44,8 @@ public class Transaction {
         this.transactionDateTime = transactionDateTime;
     }
 
-    public Transaction(NewTransaction newTransaction, String category) {
-        this.transactionOwner = newTransaction.transactionOwner();
+    public Transaction(NewTransaction newTransaction, BankAccount transactionOwner, String category) {
+        this.transactionOwner = transactionOwner;
         this.toBankAccount = newTransaction.toBankAccount();
         this.transactionType = TransactionType.SENT;
         this.amount = new BigDecimal(newTransaction.amount());

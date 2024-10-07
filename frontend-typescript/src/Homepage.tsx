@@ -29,7 +29,7 @@ function Homepage() {
     }
 
     function goToAccount(iban: string){
-        navigate(`/accounts/${iban}`);
+        navigate(`/accounts/${iban}/transactions`);
     }
 
 
@@ -39,13 +39,15 @@ function Homepage() {
   return (
       <>
           <h1>Welcome back {usersName}</h1>
-
+          <button onClick={() => navigate(`/accounts/${username}/transfer`)}>
+              <h2>Transfer money</h2>
+          </button>
           <h1>Your Accounts</h1>
           {accounts.map((account) => (
               <button type="button" className="btn btn-outline-dark btn-lg btn-block" onClick={() => goToAccount(account.iban)}>
                   <h2>{account.accountName}</h2>
                   <p>{account.iban}</p>
-                  <p>€{account.balance}</p>
+                  <p>€{account.balance.toFixed(2)}</p>
               </button>
           ))}
       </>
