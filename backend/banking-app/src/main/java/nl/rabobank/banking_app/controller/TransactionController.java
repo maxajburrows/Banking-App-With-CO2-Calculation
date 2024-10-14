@@ -1,11 +1,13 @@
 package nl.rabobank.banking_app.controller;
 
+import java.security.Principal;
 import java.util.List;
 
-import nl.rabobank.banking_app.Service.TransactionService;
+import nl.rabobank.banking_app.dto.NewTransaction;
+import nl.rabobank.banking_app.service.TransactionService;
 import nl.rabobank.banking_app.model.Transaction;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +24,8 @@ public class TransactionController {
         this.service = service;
     }
     @GetMapping
-    public List<Transaction> getAllTransactions() {
+    public List<Transaction> getAllTransactions(Principal principal) {
+        System.out.println(principal.getName());
         return service.listAllTransactions();
     }
 
@@ -32,9 +35,11 @@ public class TransactionController {
     }
 
     @PostMapping
-    public Transaction addTransaction(@RequestBody Transaction transaction) {
+    public Transaction addTransaction(@RequestBody NewTransaction transaction) {
         return service.addTransaction(transaction);
     }
+
+    // TODO: Add send money endpoint.
 
     @PatchMapping("/{transactionId}")
     public Transaction editCategory(@PathVariable Long transactionId, @RequestBody String category) {

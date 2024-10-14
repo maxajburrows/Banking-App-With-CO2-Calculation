@@ -1,12 +1,17 @@
 package nl.rabobank.banking_app.model;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class BankAccount {
@@ -14,13 +19,40 @@ public class BankAccount {
     @Column(length = 34)
     private String iban;
 
+    @Column(nullable = false)
     private String accountName;
 
-    @OneToMany(mappedBy = "fromBankAccount")
+    //    @Column(nullable = false)
+    @OneToMany(mappedBy = "transactionOwner")
+    @JsonIgnore
     List<Transaction> transactions;
 
-    @ManyToOne
+    public BigDecimal getBalance() {
+        BigDecimal balance = BigDecimal.ZERO;
+        for (Transaction transaction : transactions) {
+            if (transaction.getTransactionType() == TransactionType.RECEIVED) {
+                balance = balance.add(transaction.getAmount());
+                continue;
+            }
+            balance = balance.subtract(transaction.getAmount());
+        }
+        return balance;
+    }
+
+    //    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private BankUser accountOwner;
+
+    public BankAccount() {
+    }
+
+    public BankAccount(String iban, String accountName, BankUser accountOwner) {
+        this.iban = iban;
+        this.accountName = accountName;
+        this.accountOwner = accountOwner;
+        this.transactions = new ArrayList<>();
+    }
 
     public String getIban() {
         return iban;

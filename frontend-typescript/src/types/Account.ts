@@ -1,8 +1,10 @@
 import {Transaction} from "./Transaction.ts";
 
 export type Account = {
+    // TODO: Add the missing properties
     iban: string;
-    name: string;
+    accountName: string;
     transactions: Transaction[];
-    accountOwner: string; // Do I need to define a type for this?
+    accountOwner: string;
+    balance: number;
 }

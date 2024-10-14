@@ -9,7 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-import nl.rabobank.banking_app.model.BankAccount;
+import nl.rabobank.banking_app.dto.NewTransaction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jdk.jfr.Category;
 
 @Entity
 public class Transaction {
@@ -17,15 +21,42 @@ public class Transaction {
     @GeneratedValue
     private Long transactionId;
     @ManyToOne
-    @JoinColumn(name = "from_iban")
-    BankAccount fromBankAccount;
-    @ManyToOne
-    @JoinColumn(name = "to_iban")
-    BankAccount toBankAccount;
+    @JoinColumn(name = "account_owner")
+    @JsonIgnore
+    BankAccount transactionOwner;
+    String toBankAccount;
+    TransactionType transactionType;
     BigDecimal amount;
     String description;
     String category;
     LocalDateTime transactionDateTime;
+
+    public Transaction() {
+    }
+
+    public Transaction(BankAccount transactionOwner, String toBankAccount, TransactionType transactionType, BigDecimal amount, String description, String category, LocalDateTime transactionDateTime) {
+        this.transactionOwner = transactionOwner;
+        this.toBankAccount = toBankAccount;
+        this.transactionType = transactionType;
+        this.amount = amount;
+        this.description = description;
+        this.category = category;
+        this.transactionDateTime = transactionDateTime;
+    }
+
+    public Transaction(NewTransaction newTransaction, BankAccount transactionOwner, String category) {
+        this.transactionOwner = transactionOwner;
+        this.toBankAccount = newTransaction.toBankAccount();
+        this.transactionType = TransactionType.SENT;
+        this.amount = new BigDecimal(newTransaction.amount());
+        this.description = newTransaction.description();
+        this.category = category;
+        this.transactionDateTime = LocalDateTime.now();
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
 
     public Long getTransactionId() {
         return transactionId;
@@ -35,19 +66,19 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public BankAccount getFromBankAccount() {
-        return fromBankAccount;
+    public BankAccount getTransactionOwner() {
+        return transactionOwner;
     }
 
-    public void setFromBankAccount(final BankAccount fromBankAccount) {
-        this.fromBankAccount = fromBankAccount;
+    public void setTransactionOwner(final BankAccount transactionOwner) {
+        this.transactionOwner = transactionOwner;
     }
 
-    public BankAccount getToBankAccount() {
+    public String getToBankAccount() {
         return toBankAccount;
     }
 
-    public void setToBankAccount(final BankAccount toBankAccount) {
+    public void setToBankAccount(final String toBankAccount) {
         this.toBankAccount = toBankAccount;
     }
 

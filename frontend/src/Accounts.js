@@ -1,8 +1,6 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './App.css';
-import { useEffect, useState } from 'react';
-
-
+import {useEffect, useState} from 'react';
 
 function Accounts() {
     const [data, setData] = useState([]);
@@ -20,13 +18,12 @@ function Accounts() {
         fetchData();
     }, []);
 
-
     return (
         <section>
             <h1>My Accounts</h1>
             {data.map((account) => (
                 <Link to={`/accounts/${account.iban}/transactions`} key={account.id}>
-                    <button type="button" className="btn btn-outline-dark btn-lg btn-block" >
+                    <button type="button" className="btn btn-outline-dark btn-lg btn-block">
                         <h2>{account.name}</h2>
                         <p>{account.iban}</p>
                     </button>

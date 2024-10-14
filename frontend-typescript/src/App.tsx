@@ -1,6 +1,8 @@
-import Accounts from "./Accounts.tsx";
-import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import Homepage from "./Homepage.tsx";
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Transactions from "./Transactions.tsx";
+import Login from "./Login.tsx";
+import SendMoney from "./SendMoney.tsx";
 
 function App() {
   return (
@@ -8,12 +10,14 @@ function App() {
         <Routes>
           <Route
               path="/"
-              element={<Navigate to="/accounts"/>}/>
+              element={<Login />} />
           <Route
               path="/accounts"
-              element={<Accounts />} />
+              element={<Homepage />} />
           <Route path="/accounts/:iban/transactions"
                  element={<Transactions />} />
+          <Route path="/accounts/:user/transfer"
+                 element={<SendMoney />} />
         </Routes>
       </Router>
   )

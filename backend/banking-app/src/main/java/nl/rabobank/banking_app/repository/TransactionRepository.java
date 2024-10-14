@@ -1,6 +1,4 @@
-package nl.rabobank.banking_app.Repository;
-
-import java.util.List;
+package nl.rabobank.banking_app.repository;
 
 import nl.rabobank.banking_app.model.Transaction;
 
