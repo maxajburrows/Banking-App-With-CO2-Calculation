@@ -11,15 +11,13 @@ function Login() {
 
     async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const encodedCredentials : string = btoa(`${username}:${password}`);
-        const requestUrl : string = "http://localhost:8080/accounts";
-        const requestHeaders : object = { "Authorization": `Basic ${encodedCredentials}` };
+        const requestUrl : string = "http://localhost:8080/auth/login";
+        const requestBody : object = { username, password };
         try {
-            await axios.get(requestUrl, { headers: requestHeaders });
+            const token = (await axios.post(requestUrl, requestBody)).data;
             navigate("/accounts");
-            localStorage.setItem("username", username);
-            localStorage.setItem("password", password);
-            console.log("Successfully logged in");
+            localStorage.setItem("token", token);
+            console.log(token);
         } catch (e) {
             console.error(e);
             setFailedLogin(true);

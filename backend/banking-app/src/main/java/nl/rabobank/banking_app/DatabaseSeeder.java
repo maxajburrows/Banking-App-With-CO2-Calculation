@@ -16,6 +16,7 @@ import nl.rabobank.banking_app.repository.BankAccountRepository;
 import nl.rabobank.banking_app.repository.TransactionRepository;
 import nl.rabobank.banking_app.repository.UserRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
