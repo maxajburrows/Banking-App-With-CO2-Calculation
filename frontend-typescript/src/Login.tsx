@@ -16,6 +16,7 @@ function Login() {
         try {
             const token = (await axios.post(requestUrl, requestBody)).data;
             navigate("/accounts");
+            localStorage.setItem("username", username);
             localStorage.setItem("token", token);
             console.log(token);
         } catch (e) {

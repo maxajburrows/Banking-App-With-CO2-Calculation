@@ -45,8 +45,6 @@ public class SecurityConfiguration {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(authenticationProvider())
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-            //.httpBasic(withDefaults())
-            //.userDetailsService(userDetailsService) // TODO: Workout if this is still needed.
             .csrf(AbstractHttpConfigurer::disable)// TODO: Look into CSRF protection, for increased security.
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))

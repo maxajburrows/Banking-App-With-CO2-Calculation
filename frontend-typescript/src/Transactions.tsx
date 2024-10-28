@@ -9,10 +9,7 @@ function Transactions() {
 
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const baseUrl : string = "http://localhost:8080/transactions/";
-    const username : string | null = localStorage.getItem("username");
-    const password : string | null = localStorage.getItem("password");
-    const encodedCredentials : string = btoa(`${username}:${password}`);
-    const requestHeaders : object = { "Authorization": `Basic ${encodedCredentials}` };
+    const requestHeaders : object = { "Authorization": `Bearer ${localStorage.getItem("token")}` };
     const { iban } = useParams();
 
 
