@@ -34,10 +34,13 @@ public class TransactionService {
 
     public Transaction addTransaction(NewTransaction transaction) {
         BankAccount transactionAccount = bankAccountService.getBankAccountByIban(transaction.transactionOwner());
-        Transaction fullTransaction = new Transaction(transaction, transactionAccount, "Groceries always"); // TODO: Implement catogorisation
+        // TODO: Call catorgorisation service
+        // TODO: Call CO2 calculator service - How accurate can you make this? - Can you do subcategories?
+        Transaction fullTransaction = new Transaction(transaction, transactionAccount, "Groceries always"); // TODO: Implement catogorisation - use known IBANs (and maybe description)
         return transactionRepository.save(fullTransaction);
     }
 
+    // TODO: Implement this in the front end!! - It is required
     public Transaction editCategory(Long transactionId, String category) {
         Optional<Transaction> transactionToUpdateOptional = transactionRepository.findById(transactionId);
         if (transactionToUpdateOptional.isEmpty()) {

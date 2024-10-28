@@ -73,7 +73,7 @@ public class DatabaseSeeder {
 
     private void createTransactions(List<BankAccount> currentAccounts, List<BankAccount> savingsAccounts) {
         Random random = new Random();
-        List<String> categories = Arrays.asList("Groceries", "Rent", "Salary", "Gift", "", ""Other");
+        List<String> categories = Arrays.asList("Groceries", "Rent", "Salary", "Gift", "Transport", "Utilities", "Other");
         for (int i = 0; i < currentAccounts.size(); i++) {
             // TODO: Can this be done with enhanced for loop?
             for (int j = 0; j < savingsAccounts.size(); j++) {
