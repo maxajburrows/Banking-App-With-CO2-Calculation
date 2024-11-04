@@ -19,12 +19,11 @@ function SendMoney() {
         e.preventDefault();
         const requestUrl: string = "http://localhost:8080/transactions";
         const requestBody: object = {
-            fromBankAccount: username,
+            transactionOwnerUsername: username,
             toBankAccount: receiverIban,
             amount,
             description
         }
-        console.log(requestHeaders)
         try {
             const response = (await axios.post(requestUrl, requestBody, {headers: requestHeaders})).data
             console.log(response)
