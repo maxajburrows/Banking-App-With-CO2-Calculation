@@ -56,10 +56,6 @@ public class TransactionService {
         return "Groceries"; // TODO: Implement catogorisation properly - use known IBANs (and maybe description)
     }
 
-    public double calculateCO2(NewTransaction newTransaction) {
-        return 0.0; // TODO: Implement CO2 calculation - How accurate can you make this? - Can you do subcategories?
-    }
-
     public List<SpendingItem> calculateSpending(String accountIBAN, Optional<LocalDateTime> startDate, Optional<LocalDateTime> endDate, Optional<PeriodBin> periodBin) {
         // If no start date no filter.
         // If no end date no filter.
