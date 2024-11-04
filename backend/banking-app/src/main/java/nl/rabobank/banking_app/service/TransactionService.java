@@ -7,6 +7,9 @@ import java.util.Optional;
 import nl.rabobank.banking_app.dto.NewTransaction;
 import nl.rabobank.banking_app.model.BankAccount;
 import nl.rabobank.banking_app.model.Category;
+import nl.rabobank.banking_app.model.KnownIban;
+import nl.rabobank.banking_app.repository.CategoryRepository;
+import nl.rabobank.banking_app.repository.KnownIbanRepository;
 import nl.rabobank.banking_app.repository.TransactionRepository;
 import nl.rabobank.banking_app.model.PeriodBin;
 import nl.rabobank.banking_app.model.SpendingItem;
@@ -19,10 +22,14 @@ import org.springframework.stereotype.Service;
 public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final BankAccountService bankAccountService;
+    private final KnownIbanRepository knownIbanRepository;
+    private final CategoryRepository categoryRepository;
     @Autowired
-    public TransactionService(TransactionRepository transactionRepository, BankAccountService bankAccountService) {
+    public TransactionService(TransactionRepository transactionRepository, BankAccountService bankAccountService, KnownIbanRepository knownIbanRepository, CategoryRepository categoryRepository) {
         this.transactionRepository = transactionRepository;
         this.bankAccountService = bankAccountService;
+        this.knownIbanRepository = knownIbanRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public List<Transaction> listAllTransactions() {
@@ -53,7 +60,11 @@ public class TransactionService {
     }
 
     public Category categoriseTransaction(NewTransaction newTransaction) {
-        return "Groceries"; // TODO: Implement catogorisation properly - use known IBANs (and maybe description)
+        Optional<KnownIban> knownIban = knownIbanRepository.findById(newTransaction.toBankAccount());
+        if (knownIban.isPresent()) {
+            return knownIban.get().getCategory();
+        }
+        return categoryRepository.findById("Other").get();
     }
 
     public List<SpendingItem> calculateSpending(String accountIBAN, Optional<LocalDateTime> startDate, Optional<LocalDateTime> endDate, Optional<PeriodBin> periodBin) {

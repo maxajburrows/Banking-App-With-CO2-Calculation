@@ -12,4 +12,8 @@ public class KnownIban {
     private String iban;
     @ManyToOne
     private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
 }
