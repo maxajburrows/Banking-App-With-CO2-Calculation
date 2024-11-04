@@ -34,6 +34,7 @@ function Homepage() {
     useEffect(() => {
         fetchAccountData();
     }, []);
+
   return (
       <>
           <h1>Welcome back {usersName}</h1>
