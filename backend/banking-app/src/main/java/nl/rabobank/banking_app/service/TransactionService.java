@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import nl.rabobank.banking_app.dto.NewTransaction;
 import nl.rabobank.banking_app.model.BankAccount;
+import nl.rabobank.banking_app.model.Category;
 import nl.rabobank.banking_app.repository.TransactionRepository;
 import nl.rabobank.banking_app.model.PeriodBin;
 import nl.rabobank.banking_app.model.SpendingItem;
@@ -34,15 +35,14 @@ public class TransactionService {
 
     public Transaction addTransaction(NewTransaction transaction) {
         BankAccount transactionAccount = bankAccountService.getBankAccountByIban(transaction.transactionOwnerUsername());
-        String category = categoriseTransaction(transaction);
-        double co2Emisions = calculateCO2(transaction);
+        Category category = categoriseTransaction(transaction);
 
         Transaction fullTransaction = new Transaction(transaction, transactionAccount, category); // TODO: Add CO2 emisions to full transaction
         return transactionRepository.save(fullTransaction);
     }
 
     // TODO: Implement this in the front end!! - It is required
-    public Transaction editCategory(Long transactionId, String category) {
+    public Transaction editCategory(Long transactionId, Category category) {
         Optional<Transaction> transactionToUpdateOptional = transactionRepository.findById(transactionId);
         if (transactionToUpdateOptional.isEmpty()) {
             return null;
@@ -52,7 +52,7 @@ public class TransactionService {
         return transactionRepository.save(transactionToUpdate);
     }
 
-    public String categoriseTransaction(NewTransaction newTransaction) {
+    public Category categoriseTransaction(NewTransaction newTransaction) {
         return "Groceries"; // TODO: Implement catogorisation properly - use known IBANs (and maybe description)
     }
 

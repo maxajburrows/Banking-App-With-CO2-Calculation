@@ -10,6 +10,7 @@ import jakarta.annotation.PostConstruct;
 
 import nl.rabobank.banking_app.model.BankAccount;
 import nl.rabobank.banking_app.model.BankUser;
+import nl.rabobank.banking_app.model.Category;
 import nl.rabobank.banking_app.model.Transaction;
 import nl.rabobank.banking_app.model.TransactionType;
 import nl.rabobank.banking_app.repository.BankAccountRepository;
@@ -79,14 +80,14 @@ public class DatabaseSeeder {
             // TODO: Can this be done with enhanced for loop?
             for (int j = 0; j < savingsAccounts.size(); j++) {
                 if (i == j) continue;
-                String category = categories.get(random.nextInt(categories.size()));
+                Category category = categories.get(random.nextInt(categories.size()));
                 createAndSaveTransactions(currentAccounts.get(i), savingsAccounts.get(j), BigDecimal.valueOf(random.nextDouble(100)), category, category);
             }
         }
         for (int i = 0; i < currentAccounts.size(); i++) {
             for (int j = 0; j < currentAccounts.size(); j++) {
                 if (i == j) continue;
-                String category = categories.get(random.nextInt(categories.size()));
+                Category category = categories.get(random.nextInt(categories.size()));
                 createAndSaveTransactions(currentAccounts.get(j), currentAccounts.get(i), BigDecimal.valueOf(random.nextDouble(100)), category, category);
             }
         }
@@ -101,7 +102,7 @@ public class DatabaseSeeder {
 //        calculateBalances(savingsAccounts);
     }
 
-    private void createAndSaveTransactions(BankAccount fromAccount, BankAccount toAccount, BigDecimal amount, String description, String category) {
+    private void createAndSaveTransactions(BankAccount fromAccount, BankAccount toAccount, BigDecimal amount, Category description, Category category) {
         Transaction sentTransaction = new Transaction(fromAccount, toAccount.getIban(), TransactionType.SENT, amount, description, category, LocalDateTime.now());
         Transaction receivedTransaction = new Transaction(toAccount, fromAccount.getIban(), TransactionType.RECEIVED, amount, description, category, LocalDateTime.now());
         transactionRepository.save(sentTransaction);

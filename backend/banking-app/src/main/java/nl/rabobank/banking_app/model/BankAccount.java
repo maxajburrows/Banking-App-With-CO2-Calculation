@@ -38,8 +38,6 @@ public class BankAccount {
         }
         return balance;
     }
-
-    //    @Column(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private BankUser accountOwner;

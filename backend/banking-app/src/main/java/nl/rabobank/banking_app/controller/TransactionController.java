@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import nl.rabobank.banking_app.dto.NewTransaction;
+import nl.rabobank.banking_app.model.Category;
 import nl.rabobank.banking_app.service.TransactionService;
 import nl.rabobank.banking_app.model.Transaction;
 
@@ -42,7 +43,7 @@ public class TransactionController {
     // TODO: Add send money endpoint.
 
     @PatchMapping("/{transactionId}")
-    public Transaction editCategory(@PathVariable Long transactionId, @RequestBody String category) {
+    public Transaction editCategory(@PathVariable Long transactionId, @RequestBody Category category) {
         return service.editCategory(transactionId, category);
     }
 }

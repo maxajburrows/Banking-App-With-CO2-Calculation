@@ -26,29 +26,34 @@ public class Transaction {
     TransactionType transactionType;
     BigDecimal amount;
     String description;
-    String category;
+    @ManyToOne
+    Category category;
+    double kgCo2;
     LocalDateTime transactionDateTime;
 
     public Transaction() {
     }
 
-    public Transaction(BankAccount transactionOwner, String toBankAccount, TransactionType transactionType, BigDecimal amount, String description, String category, LocalDateTime transactionDateTime) {
+    public Transaction(BankAccount transactionOwner, String toBankAccount, TransactionType transactionType, BigDecimal amount, String description, Category category,
+        LocalDateTime transactionDateTime) {
         this.transactionOwner = transactionOwner;
         this.toBankAccount = toBankAccount;
         this.transactionType = transactionType;
         this.amount = amount;
         this.description = description;
         this.category = category;
+        this.kgCo2 = category.getKgCo2PerEuro() * amount.doubleValue();
         this.transactionDateTime = transactionDateTime;
     }
 
-    public Transaction(NewTransaction newTransaction, BankAccount transactionOwner, String category) {
+    public Transaction(NewTransaction newTransaction, BankAccount transactionOwner, Category category) {
         this.transactionOwner = transactionOwner;
         this.toBankAccount = newTransaction.toBankAccount();
         this.transactionType = TransactionType.SENT;
         this.amount = newTransaction.amount();
         this.description = newTransaction.description();
         this.category = category;
+        this.kgCo2 = category.getKgCo2PerEuro() * amount.doubleValue();
         this.transactionDateTime = LocalDateTime.now();
     }
 
@@ -96,11 +101,11 @@ public class Transaction {
         this.description = description;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(final String category) {
+    public void setCategory(final Category category) {
         this.category = category;
     }
 
