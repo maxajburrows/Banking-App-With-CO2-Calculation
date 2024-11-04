@@ -8,20 +8,20 @@ function SendMoney() {
     const username : string | null = localStorage.getItem("username");
     const navigate = useNavigate();
 
-    const [iban, setIban] = useState("");
+    const [receiverIban, setReceiverIban] = useState("");
+    const [userIban, setUserIban] = useState("");
     const [amount, setAmount] = useState("");
     const [description, setDescription] = useState("");
-
-
 
     async function sendMoneyRequest(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const requestBody : object = {
             fromBankAccount: username,
-            toBankAccount: iban,
+            toBankAccount: receiverIban,
             amount,
             description
         }
+        console.log(requestHeaders)
         try {
             const response = (await axios.post(requestUrl, requestBody, { headers: requestHeaders })).data
             console.log(response)
@@ -32,10 +32,14 @@ function SendMoney() {
         navigate("/accounts");  // TODO: Successful transaction page?
     }
 
+    // TODO: Call backend to get user's accounts
+
     return (<>
         <form onSubmit={sendMoneyRequest}>
-            <label htmlFor="Iban">Iban</label>
-            <input type="text" id="Iban" value={iban} onChange={e => setIban(e.target.value)}/>
+            <label htmlFor={"UserIban"}>Your Iban</label>
+            <input type="text" id="UserIban" value={userIban} onChange={e => setUserIban(e.target.value)}/>
+            <label htmlFor="ReceiverIban">Iban</label>
+            <input type="text" id="ReceiverIban" value={receiverIban} onChange={e => setReceiverIban(e.target.value)}/>
             <label htmlFor="amount">Amount</label>
             <input type="number" id="amount" value={amount} onChange={e => setAmount(e.target.value)}/>
             <label htmlFor="description">Description</label>
