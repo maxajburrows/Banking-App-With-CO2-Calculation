@@ -27,13 +27,29 @@ function Login() {
 
     return (<>
         {failedLogin && <p>Incorrect username or password</p>}
-        <form onSubmit={handleLogin}>
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username" value={username} onChange={e => setUsername(e.target.value)}/>
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)}/>
-            <button type="submit">Login</button>
-        </form>
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="text-center mb-4"><h1>Basic Bank</h1>
+                        <p>No thrills banking. We keep your money safe. That's it</p>
+                        <h3>Login</h3>
+                        <form onSubmit={handleLogin}>
+                            <div className="form-group">
+                                <label htmlFor="username">Username</label>
+                                <input type="text" id="username" className="form-control" placeholder="Enter username" value={username}
+                                       onChange={e => setUsername(e.target.value)}/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" id="password" className="form-control" placeholder="Enter password" value={password}
+                                       onChange={e => setPassword(e.target.value)}/>
+                            </div>
+                            <button type="submit" className="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </>);
 }
 
