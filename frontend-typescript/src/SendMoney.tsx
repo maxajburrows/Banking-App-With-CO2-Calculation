@@ -23,7 +23,8 @@ function SendMoney() {
             description
         }
         try {
-            await axios.post(requestUrl, requestBody, { headers: requestHeaders })
+            const response = (await axios.post(requestUrl, requestBody, { headers: requestHeaders })).data
+            console.log(response)
         }
         catch (e) {
             console.error(e);

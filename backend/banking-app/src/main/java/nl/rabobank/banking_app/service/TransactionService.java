@@ -34,9 +34,10 @@ public class TransactionService {
 
     public Transaction addTransaction(NewTransaction transaction) {
         BankAccount transactionAccount = bankAccountService.getBankAccountByIban(transaction.transactionOwnerUsername());
-        // TODO: Call catorgorisation service
-        // TODO: Call CO2 calculator service - How accurate can you make this? - Can you do subcategories?
-        Transaction fullTransaction = new Transaction(transaction, transactionAccount, "Groceries always"); // TODO: Implement catogorisation - use known IBANs (and maybe description)
+        String category = categoriseTransaction(transaction);
+        double co2Emisions = calculateCO2(transaction);
+
+        Transaction fullTransaction = new Transaction(transaction, transactionAccount, category); // TODO: Add CO2 emisions to full transaction
         return transactionRepository.save(fullTransaction);
     }
 
@@ -49,6 +50,14 @@ public class TransactionService {
         Transaction transactionToUpdate = transactionToUpdateOptional.get();
         transactionToUpdate.setCategory(category);
         return transactionRepository.save(transactionToUpdate);
+    }
+
+    public String categoriseTransaction(NewTransaction newTransaction) {
+        return "Groceries"; // TODO: Implement catogorisation properly - use known IBANs (and maybe description)
+    }
+
+    public double calculateCO2(NewTransaction newTransaction) {
+        return 0.0; // TODO: Implement CO2 calculation - How accurate can you make this? - Can you do subcategories?
     }
 
     public List<SpendingItem> calculateSpending(String accountIBAN, Optional<LocalDateTime> startDate, Optional<LocalDateTime> endDate, Optional<PeriodBin> periodBin) {

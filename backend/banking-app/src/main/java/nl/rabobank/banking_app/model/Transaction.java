@@ -46,7 +46,7 @@ public class Transaction {
         this.transactionOwner = transactionOwner;
         this.toBankAccount = newTransaction.toBankAccount();
         this.transactionType = TransactionType.SENT;
-        this.amount = new BigDecimal(newTransaction.amount());
+        this.amount = newTransaction.amount();
         this.description = newTransaction.description();
         this.category = category;
         this.transactionDateTime = LocalDateTime.now();
