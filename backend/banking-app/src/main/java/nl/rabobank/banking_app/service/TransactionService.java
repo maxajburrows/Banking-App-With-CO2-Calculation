@@ -33,7 +33,7 @@ public class TransactionService {
     }
 
     public Transaction addTransaction(NewTransaction transaction) {
-        BankAccount transactionAccount = bankAccountService.getBankAccountByIban(transaction.transactionOwner());
+        BankAccount transactionAccount = bankAccountService.getBankAccountByIban(transaction.transactionOwnerUsername());
         // TODO: Call catorgorisation service
         // TODO: Call CO2 calculator service - How accurate can you make this? - Can you do subcategories?
         Transaction fullTransaction = new Transaction(transaction, transactionAccount, "Groceries always"); // TODO: Implement catogorisation - use known IBANs (and maybe description)

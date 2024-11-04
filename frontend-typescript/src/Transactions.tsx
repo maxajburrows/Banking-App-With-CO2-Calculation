@@ -6,12 +6,10 @@ import {useEffect, useState} from "react";
 
 
 function Transactions() {
-
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const baseUrl : string = "http://localhost:8080/transactions/";
     const requestHeaders : object = { "Authorization": `Bearer ${localStorage.getItem("token")}` };
     const { iban } = useParams();
-
 
     async function fetchTransactions() {
         try {

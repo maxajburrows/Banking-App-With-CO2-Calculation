@@ -1,8 +1,7 @@
 package nl.rabobank.banking_app.dto;
 
-import nl.rabobank.banking_app.model.BankAccount;
 
-public record NewTransaction(String transactionOwner,
+public record NewTransaction(String transactionOwnerUsername,
                              String toBankAccount,
                              String amount,
                              String description) {

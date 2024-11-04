@@ -19,7 +19,7 @@ public class UserService {
         return userRepository.findById(userName).orElse(null); // TODO: Throw exception not return null.
     }
 
-    public BankUser createUser(final BankUser user) {
+    public BankUser createUser(BankUser user) {
         return userRepository.save(user);
     }
 

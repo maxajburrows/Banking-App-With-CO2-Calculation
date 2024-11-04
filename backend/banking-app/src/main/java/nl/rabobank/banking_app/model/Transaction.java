@@ -13,8 +13,6 @@ import nl.rabobank.banking_app.dto.NewTransaction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jdk.jfr.Category;
-
 @Entity
 public class Transaction {
     @Id
