@@ -1,30 +1,30 @@
-import axios from 'axios';
+// import axios from 'axios';
 import './style/general.css';
 
-import { useNavigate } from "react-router-dom";
-import React, {useState} from "react";
+// import { useNavigate } from "react-router-dom";
+// import React, {useState} from "react";
 
-function Login() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [failedLogin, setFailedLogin] = useState(false);
-    const navigate = useNavigate();
-
-    async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        const requestUrl : string = "http://localhost:8080/auth/login";
-        const requestBody : object = { username, password };
-        try {
-            const token = (await axios.post(requestUrl, requestBody)).data;
-            navigate("/accounts");
-            localStorage.setItem("username", username);
-            localStorage.setItem("token", token);
-            console.log(token);
-        } catch (e) {
-            console.error(e);
-            setFailedLogin(true);
-        }
-    }
+function SignUp() {
+    // const [username, setUsername] = useState("");
+    // const [password, setPassword] = useState("");
+    // const [failedLogin, setFailedLogin] = useState(false);
+    // const navigate = useNavigate();
+    //
+    // async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    //     e.preventDefault();
+    //     const requestUrl : string = "http://localhost:8080/auth/login";
+    //     const requestBody : object = { username, password };
+    //     try {
+    //         const token = (await axios.post(requestUrl, requestBody)).data;
+    //         navigate("/accounts");
+    //         localStorage.setItem("username", username);
+    //         localStorage.setItem("token", token);
+    //         console.log(token);
+    //     } catch (e) {
+    //         console.error(e);
+    //         setFailedLogin(true);
+    //     }
+    // }
 
     // return (<>
     //     {failedLogin && <p>Incorrect username or password</p>}
@@ -61,11 +61,14 @@ function Login() {
             <div className="row gx-lg-5 align-items-center mb-5">
                 <div className="col-lg-6 mb-5 mb-lg-0" style={{zIndex: 10}}>
                     <h1 className="my-5 display-5 fw-bold ls-tight" style={{color: 'hsl(218, 81%, 95%)'}}>
-                        Max <br />
-                        <span style={{color: 'hsl(218, 81%, 75%)'}}>Banking</span>
+                        The best offer <br />
+                        <span style={{color: 'hsl(218, 81%, 75%)'}}>for your business</span>
                     </h1>
                     <p className="mb-4 opacity-70" style={{color: 'hsl(218, 81%, 85%)'}}>
-                        Maximum security. Maximum returns. Maximum value.
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                        Temporibus, expedita iusto veniam atque, magni tempora mollitia
+                        dolorum consequatur nulla, neque debitis eos reprehenderit quasi
+                        ab ipsum nisi dolorem modi. Quos?
                     </p>
                 </div>
 
@@ -140,4 +143,4 @@ function Login() {
     </>)
 }
 
-export default Login;
+export default SignUp;
