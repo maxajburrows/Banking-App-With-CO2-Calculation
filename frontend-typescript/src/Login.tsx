@@ -1,4 +1,5 @@
 import axios from 'axios';
+import './style/general.css';
 
 import { useNavigate } from "react-router-dom";
 import React, {useState} from "react";
@@ -26,32 +27,51 @@ function Login() {
     }
 
     return (<>
-        {failedLogin && <p>Incorrect username or password</p>}
-        <div className="container vh-100">
-            <div className="row justify-content-center align-content-center vh-100">
-                <div className="col-md-7 text-center">
-                    <div className="text-center">
-                        <h1>Basic Bank</h1>
-                        <p className="col-8 mx-auto">No thrills banking. We keep your money safe. That's it.</p>
-                        <h3>Login</h3>
-                        <form onSubmit={handleLogin}>
-                            <div className="form-group">
-                                <label className="col" htmlFor="username">Username</label>
-                                <input type="text" id="username" className="form-control" placeholder="Enter username" value={username}
-                                       onChange={e => setUsername(e.target.value)}/>
-                            </div>
-                            <div className="form-group">
-                                <label className="text-" htmlFor="password">Password</label>
-                                <input type="password" id="password" className="form-control" placeholder="Enter password" value={password}
-                                       onChange={e => setPassword(e.target.value)}/>
-                            </div>
-                            <button type="submit" className="btn btn-primary">Login</button>
-                        </form>
+
+    <section className="background-radial-gradient overflow-hidden vh-100 justify-content-center">
+        <div className="container px-4 px-md-5 text-center text-lg-start my-5">
+            <div className="row gx-lg-5 align-items-center mb-5">
+                <div className="col-lg-6 mb-5 mb-lg-0" style={{zIndex: 10}}>
+                    <h1 className="my-5 display-5 fw-bold ls-tight" style={{color: 'hsl(218, 81%, 95%)'}}>
+                        Max <br />
+                        <span style={{color: 'hsl(218, 81%, 75%)'}}>Banking</span>
+                    </h1>
+                    <p className="mb-4 opacity-70" style={{color: 'hsl(218, 81%, 85%)'}}>
+                        Maximum security. Maximum returns. Maximum value.
+                    </p>
+                </div>
+
+                <div className="col-lg-6 mb-5 mb-lg-0 position-relative">
+                    <div id="radius-shape-1" className="position-absolute rounded-circle shadow-5-strong"></div>
+                    <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
+
+                    <div className="card bg-glass">
+                        <div className="card-body px-4 py-5 px-md-5">
+                            <form onSubmit={handleLogin}>
+                                {failedLogin && <p>Incorrect username or password</p>}
+
+                                <div data-mdb-input-init className="form-outline mb-4">
+                                    <label className="form-label" htmlFor="form3Example3">Email address</label>
+                                    <input type="email" id="form3Example3" className="form-control" placeholder="Enter your username" value={username}
+                                           onChange={e => setUsername(e.target.value)}/>
+                                </div>
+
+                                <div data-mdb-input-init className="form-outline mb-4">
+                                <label className="form-label" htmlFor="form3Example4">Password</label>
+                                    <input type="password" id="form3Example4" className="form-control" placeholder="Enter your password" value={password}
+                                           onChange={e => setPassword(e.target.value)}/>
+                                </div>
+                                <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block">
+                                    Login
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </>);
+    </section>
+    </>)
 }
 
 export default Login;
