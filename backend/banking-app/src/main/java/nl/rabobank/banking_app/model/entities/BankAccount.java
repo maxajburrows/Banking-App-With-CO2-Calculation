@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class BankAccount {
     @Id
-    @Column(length = 34)
+    @Column(length = 18)
     private String iban;
 
     @Column(nullable = false)
