@@ -51,6 +51,28 @@ public class DatabaseSeeder {
         createBankAccounts(bankUsers);
     }
 
+    public void createCatorgories() {
+        Category rent = new Category("Rent", 0.0);
+        categoryRepository.save(rent);
+        Category groceries = new Category("Groceries", 0.0);
+        categoryRepository.save(groceries);
+        Category salary = new Category("Salary", 0.0);
+        categoryRepository.save(salary);
+        Category gift = new Category("Gift", 0.0);
+        categoryRepository.save(gift);
+        Category transport = new Category("Transport", 0.0);
+        categoryRepository.save(transport);
+        Category utilities = new Category("Utilities", 0.0);
+        categoryRepository.save(utilities);
+        Category other = new Category("Other", 0.0);
+        categoryRepository.save(other);
+
+        Category savings = new Category("Savings", 0.0);
+        categoryRepository.save(savings);
+        Category withdrawal = new Category("Withdrawal", 0.0);
+        categoryRepository.save(withdrawal);
+    }
+
 
     private void createBankAccounts(List<BankUser> bankUsers) {
         BankAccount maxSavingsAccount = new BankAccount("NL01RABO1234567890", "Max's savings", bankUsers.getFirst());
