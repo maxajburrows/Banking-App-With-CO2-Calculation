@@ -2,6 +2,7 @@ package nl.rabobank.banking_app;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -29,6 +30,7 @@ public class DatabaseSeeder {
     private BankAccountRepository bankAccountRepository;
     private CategoryRepository categoryRepository;
     private PasswordEncoder passwordEncoder;
+    List<Category> categoryList;
 
     public DatabaseSeeder(UserRepository userRepository, TransactionRepository transactionRepository, BankAccountRepository bankAccountRepository, CategoryRepository categoryRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -52,25 +54,21 @@ public class DatabaseSeeder {
     }
 
     public void createCatorgories() {
-        Category rent = new Category("Rent", 0.0);
-        categoryRepository.save(rent);
-        Category groceries = new Category("Groceries", 0.0);
-        categoryRepository.save(groceries);
-        Category salary = new Category("Salary", 0.0);
-        categoryRepository.save(salary);
-        Category gift = new Category("Gift", 0.0);
-        categoryRepository.save(gift);
-        Category transport = new Category("Transport", 0.0);
-        categoryRepository.save(transport);
-        Category utilities = new Category("Utilities", 0.0);
-        categoryRepository.save(utilities);
-        Category other = new Category("Other", 0.0);
-        categoryRepository.save(other);
+        Category rent = new Category("Rent", 0.09649);
+
+        Category groceries = new Category("Groceries", 0.61044);
+        Category clothing = new Category("Clothing", 0.37203);
+        Category transport = new Category("Transport", 0.2899);
+        Category utilities = new Category("Utilities", 0.59294);
+        Category recreation = new Category("Recreation", 0.22464);
+        Category other = new Category("Other", 0.15);
 
         Category savings = new Category("Savings", 0.0);
-        categoryRepository.save(savings);
         Category withdrawal = new Category("Withdrawal", 0.0);
-        categoryRepository.save(withdrawal);
+        Category salary = new Category("Salary", 0.0);
+
+        categoryList = Arrays.asList(rent, groceries, clothing, transport, utilities, recreation, other, savings, withdrawal, salary);
+        categoryRepository.saveAll(categoryList);
     }
 
 
