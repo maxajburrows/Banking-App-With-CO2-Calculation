@@ -3,8 +3,8 @@ package nl.rabobank.banking_app.service;
 import java.util.List;
 
 import nl.rabobank.banking_app.repository.BankAccountRepository;
-import nl.rabobank.banking_app.model.BankAccount;
-import nl.rabobank.banking_app.model.BankUser;
+import nl.rabobank.banking_app.model.entities.BankAccount;
+import nl.rabobank.banking_app.model.entities.BankUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

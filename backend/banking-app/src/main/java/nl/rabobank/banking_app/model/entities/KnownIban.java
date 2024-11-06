@@ -1,4 +1,4 @@
-package nl.rabobank.banking_app.model;
+package nl.rabobank.banking_app.model.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

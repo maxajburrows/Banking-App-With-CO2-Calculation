@@ -1,4 +1,4 @@
-package nl.rabobank.banking_app.model;
+package nl.rabobank.banking_app.model.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import nl.rabobank.banking_app.dto.NewTransaction;
+import nl.rabobank.banking_app.model.TransactionType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

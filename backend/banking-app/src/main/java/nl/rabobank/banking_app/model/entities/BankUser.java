@@ -1,4 +1,4 @@
-package nl.rabobank.banking_app.model;
+package nl.rabobank.banking_app.model.entities;
 
 import java.util.List;
 

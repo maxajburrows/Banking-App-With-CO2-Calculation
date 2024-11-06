@@ -8,11 +8,13 @@ import java.util.Random;
 
 import jakarta.annotation.PostConstruct;
 
-import nl.rabobank.banking_app.model.BankAccount;
-import nl.rabobank.banking_app.model.BankUser;
-import nl.rabobank.banking_app.model.Transaction;
+import nl.rabobank.banking_app.model.entities.BankAccount;
+import nl.rabobank.banking_app.model.entities.BankUser;
+import nl.rabobank.banking_app.model.entities.Category;
+import nl.rabobank.banking_app.model.entities.Transaction;
 import nl.rabobank.banking_app.model.TransactionType;
 import nl.rabobank.banking_app.repository.BankAccountRepository;
+import nl.rabobank.banking_app.repository.CategoryRepository;
 import nl.rabobank.banking_app.repository.TransactionRepository;
 import nl.rabobank.banking_app.repository.UserRepository;
 
@@ -25,12 +27,14 @@ public class DatabaseSeeder {
     private UserRepository userRepository;
     private TransactionRepository transactionRepository;
     private BankAccountRepository bankAccountRepository;
+    private CategoryRepository categoryRepository;
     private PasswordEncoder passwordEncoder;
 
-    public DatabaseSeeder(UserRepository userRepository, TransactionRepository transactionRepository, BankAccountRepository bankAccountRepository, PasswordEncoder passwordEncoder) {
+    public DatabaseSeeder(UserRepository userRepository, TransactionRepository transactionRepository, BankAccountRepository bankAccountRepository, CategoryRepository categoryRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.transactionRepository = transactionRepository;
         this.bankAccountRepository = bankAccountRepository;
+        this.categoryRepository = categoryRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -101,8 +105,10 @@ public class DatabaseSeeder {
     }
 
     private void createAndSaveTransactions(BankAccount fromAccount, BankAccount toAccount, BigDecimal amount, String description, String category) {
-        Transaction sentTransaction = new Transaction(fromAccount, toAccount.getIban(), TransactionType.SENT, amount, description, category, LocalDateTime.now());
-        Transaction receivedTransaction = new Transaction(toAccount, fromAccount.getIban(), TransactionType.RECEIVED, amount, description, category, LocalDateTime.now());
+        Category categoryEntity = new Category(category, 0.0);
+        categoryRepository.save(categoryEntity);
+        Transaction sentTransaction = new Transaction(fromAccount, toAccount.getIban(), TransactionType.SENT, amount, description, categoryEntity, LocalDateTime.now());
+        Transaction receivedTransaction = new Transaction(toAccount, fromAccount.getIban(), TransactionType.RECEIVED, amount, description, categoryEntity, LocalDateTime.now());
         transactionRepository.save(sentTransaction);
         transactionRepository.save(receivedTransaction);
     }

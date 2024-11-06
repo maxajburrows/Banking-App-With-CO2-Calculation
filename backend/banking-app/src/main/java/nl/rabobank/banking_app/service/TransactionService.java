@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Optional;
 
 import nl.rabobank.banking_app.dto.NewTransaction;
-import nl.rabobank.banking_app.model.BankAccount;
-import nl.rabobank.banking_app.model.Category;
-import nl.rabobank.banking_app.model.KnownIban;
+import nl.rabobank.banking_app.model.entities.BankAccount;
+import nl.rabobank.banking_app.model.entities.Category;
+import nl.rabobank.banking_app.model.entities.KnownIban;
 import nl.rabobank.banking_app.repository.CategoryRepository;
 import nl.rabobank.banking_app.repository.KnownIbanRepository;
 import nl.rabobank.banking_app.repository.TransactionRepository;
 import nl.rabobank.banking_app.model.PeriodBin;
 import nl.rabobank.banking_app.model.SpendingItem;
-import nl.rabobank.banking_app.model.Transaction;
+import nl.rabobank.banking_app.model.entities.Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

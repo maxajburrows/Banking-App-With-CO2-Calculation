@@ -4,11 +4,10 @@ import java.security.Principal;
 import java.util.List;
 
 import nl.rabobank.banking_app.dto.NewTransaction;
-import nl.rabobank.banking_app.model.Category;
+import nl.rabobank.banking_app.model.entities.Category;
 import nl.rabobank.banking_app.service.TransactionService;
-import nl.rabobank.banking_app.model.Transaction;
+import nl.rabobank.banking_app.model.entities.Transaction;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;

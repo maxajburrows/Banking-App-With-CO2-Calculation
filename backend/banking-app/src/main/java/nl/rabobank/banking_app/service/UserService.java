@@ -3,7 +3,7 @@ package nl.rabobank.banking_app.service;
 import java.util.List;
 
 import nl.rabobank.banking_app.repository.UserRepository;
-import nl.rabobank.banking_app.model.BankUser;
+import nl.rabobank.banking_app.model.entities.BankUser;
 
 import org.springframework.stereotype.Service;
 

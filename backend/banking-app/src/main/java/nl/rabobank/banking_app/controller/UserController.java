@@ -3,7 +3,7 @@ package nl.rabobank.banking_app.controller;
 import java.util.List;
 
 import nl.rabobank.banking_app.service.UserService;
-import nl.rabobank.banking_app.model.BankUser;
+import nl.rabobank.banking_app.model.entities.BankUser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -2,9 +2,6 @@ package nl.rabobank.banking_app.service;
 
 import nl.rabobank.banking_app.configuration.JwtService;
 import nl.rabobank.banking_app.model.AuthenticationRequest;
-import nl.rabobank.banking_app.model.AuthenticationResponse;
-import nl.rabobank.banking_app.model.BankUser;
-import nl.rabobank.banking_app.repository.UserRepository;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

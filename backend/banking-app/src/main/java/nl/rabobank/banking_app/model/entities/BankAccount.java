@@ -1,4 +1,4 @@
-package nl.rabobank.banking_app.model;
+package nl.rabobank.banking_app.model.entities;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,6 +10,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
+import nl.rabobank.banking_app.model.TransactionType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

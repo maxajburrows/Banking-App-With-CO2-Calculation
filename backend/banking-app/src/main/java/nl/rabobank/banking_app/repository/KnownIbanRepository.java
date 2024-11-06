@@ -1,6 +1,6 @@
 package nl.rabobank.banking_app.repository;
 
-import nl.rabobank.banking_app.model.KnownIban;
+import nl.rabobank.banking_app.model.entities.KnownIban;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
