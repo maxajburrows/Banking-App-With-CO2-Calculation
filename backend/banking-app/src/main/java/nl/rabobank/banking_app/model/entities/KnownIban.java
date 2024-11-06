@@ -24,4 +24,8 @@ public class KnownIban {
         this.iban = iban;
         this.category = category;
     }
+
+    public String getIban() {
+        return iban;
+    }
 }

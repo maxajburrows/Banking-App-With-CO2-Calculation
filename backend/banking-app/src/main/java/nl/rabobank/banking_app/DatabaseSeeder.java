@@ -34,7 +34,9 @@ public class DatabaseSeeder {
 
     private PasswordEncoder passwordEncoder;
 
-    List<Category> categoryList;
+    List<BankUser> bankUsers;
+    List<Category> constantCategoryList;
+    List<Category> randomCategoryList;
 
     static Random random = new Random();
 
@@ -44,6 +46,7 @@ public class DatabaseSeeder {
         this.transactionRepository = transactionRepository;
         this.bankAccountRepository = bankAccountRepository;
         this.categoryRepository = categoryRepository;
+        this.knownIbanRepository = knownIbanRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -56,8 +59,10 @@ public class DatabaseSeeder {
         BankUser janet = new BankUser("janet@gmail.com", "Janet", "Doe", passwordEncoder.encode("j12345"));
         userRepository.save(janet);
 
-        List<BankUser> bankUsers = Arrays.asList(max, bob, janet);         // List<BankUser> bankUsers = userRepository.findAll();
-        createBankAccounts(bankUsers);
+        bankUsers = Arrays.asList(max, bob, janet);
+        createCategories();
+        createKnownIbans();
+        createBankAccounts();
     }
 
     public void createCategories() {
@@ -74,12 +79,14 @@ public class DatabaseSeeder {
         Category withdrawal = new Category("Withdrawal", 0.0);
         Category salary = new Category("Salary", 0.0);
 
-        categoryList = Arrays.asList(rent, groceries, clothing, transport, utilities, recreation, other, savings, withdrawal, salary);
-        categoryRepository.saveAll(categoryList);
+        constantCategoryList = Arrays.asList(rent, utilities, salary);
+        randomCategoryList = Arrays.asList(groceries, clothing, transport, recreation, other);
+        categoryRepository.saveAll(constantCategoryList);
+        categoryRepository.saveAll(randomCategoryList);
     }
 
     public void createKnownIbans() {
-        for (Category category : categoryList) {
+        for (Category category : constantCategoryList) {
             for (int i = 0; i < 10; i++) {
                 String iban = generateRandomIban();
                 knownIbanRepository.save(new KnownIban(iban, category));
@@ -98,7 +105,7 @@ public class DatabaseSeeder {
         return iban.toString();
     }
 
-    private void createBankAccounts(List<BankUser> bankUsers) {
+    private void createBankAccounts() {
         BankAccount maxSavingsAccount = new BankAccount("NL01RABO1234567890", "Max's savings", bankUsers.getFirst());
         bankAccountRepository.save(maxSavingsAccount);
         BankAccount maxCurrentAccount = new BankAccount("NL02RABO1234567890", "Max's current", bankUsers.getFirst());
@@ -122,33 +129,47 @@ public class DatabaseSeeder {
     }
 
     private void createTransactions(List<BankAccount> currentAccounts, List<BankAccount> savingsAccounts) {
-        List<String> categories = Arrays.asList("Groceries", "Rent", "Salary", "Gift", "Transport", "Utilities", "Other");
-        for (int i = 0; i < currentAccounts.size(); i++) {
-            // TODO: Can this be done with enhanced for loop?
-            for (int j = 0; j < savingsAccounts.size(); j++) {
-                if (i == j)
-                    continue;
-                String category = categories.get(random.nextInt(categories.size()));
-                createAndSaveTransactions(currentAccounts.get(i), savingsAccounts.get(j), BigDecimal.valueOf(random.nextDouble(100)), category, category);
+        createRandomTransactions(currentAccounts);
+        createConstantTransactions(currentAccounts);
+
+    }
+
+    public void createRandomTransactions(List<BankAccount> currentAccounts) {
+        List<KnownIban> knownIbans = knownIbanRepository.findAll();
+        for (BankAccount currentAccount : currentAccounts) {
+            for (KnownIban knownIban : knownIbans) {
+                Transaction newTransaction = new Transaction(currentAccount, knownIban.getIban(), TransactionType.SENT, BigDecimal.valueOf(random.nextDouble(250)),
+                    knownIban.getCategory().getCategoryName(), knownIban.getCategory(), LocalDateTime.now());
             }
         }
-        for (int i = 0; i < currentAccounts.size(); i++) {
-            for (int j = 0; j < currentAccounts.size(); j++) {
-                if (i == j)
-                    continue;
-                String category = categories.get(random.nextInt(categories.size()));
-                createAndSaveTransactions(currentAccounts.get(j), currentAccounts.get(i), BigDecimal.valueOf(random.nextDouble(100)), category, category);
-            }
-        }
-        for (int i = 0; i < currentAccounts.size(); i++) {
-            for (int j = 0; j < 10; j++) {
-                createAndSaveTransactions(currentAccounts.get(i), savingsAccounts.get(i), BigDecimal.valueOf(random.nextInt(100)), "Savings", "Savings");
-                createAndSaveTransactions(savingsAccounts.get(i), currentAccounts.get(i), BigDecimal.valueOf(random.nextInt(100)), "Emergency withdrawal", "Withdrawal");
+    }
+
+    private void createConstantTransactions(List<BankAccount> currentAccounts) {
+        LocalDateTime now = LocalDateTime.now();
+        for (int i = 0; i < 13; i++) {
+            for (BankAccount currentAccount : currentAccounts) {
+                for (Category category : constantCategoryList) {
+                    if (category.getCategoryName().equals("Salary")) {
+                        Transaction newTransaction =
+                            new Transaction(currentAccount, generateRandomIban(), TransactionType.RECEIVED, BigDecimal.valueOf(2500), category.getCategoryName(), category,
+                                now.minusMonths(i));
+                        transactionRepository.save(newTransaction);
+                        continue;
+                    } else if (category.getCategoryName().equals("Rent")) {
+                        Transaction newTransaction =
+                            new Transaction(currentAccount, generateRandomIban(), TransactionType.SENT, BigDecimal.valueOf(1000), category.getCategoryName(), category,
+                                now.minusMonths(i));
+                        transactionRepository.save(newTransaction);
+                        continue;
+                    }
+                    Transaction newTransaction =
+                        new Transaction(currentAccount, generateRandomIban(), TransactionType.SENT, BigDecimal.valueOf(200), category.getCategoryName(), category,
+                            now.minusMonths(i));
+                    transactionRepository.save(newTransaction);
+                }
             }
         }
 
-        //        calculateBalances(currentAccounts);
-        //        calculateBalances(savingsAccounts);
     }
 
     private void createAndSaveTransactions(BankAccount fromAccount, BankAccount toAccount, BigDecimal amount, String description, String category) {
@@ -160,10 +181,4 @@ public class DatabaseSeeder {
         transactionRepository.save(receivedTransaction);
     }
 
-    //    private void calculateBalances(List<BankAccount> bankAccounts) {
-    //        for (BankAccount bankAccount : bankAccounts) {
-    //            bankAccount.calculateBalance();
-    //            bankAccountRepository.save(bankAccount);
-    //        }
-    //    }
 }
