@@ -1,8 +1,8 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {User} from "./types/User.ts";
-import {Account} from "./types/Account.ts";
+import {User} from "../types/User.ts";
+import {Account} from "../types/Account.ts";
 
 function SendMoney() {
     const requestHeaders: object = {"Authorization": `Bearer ${localStorage.getItem("token")}`};

@@ -1,4 +1,5 @@
 import {Account} from "./Account.ts";
+import {Category} from "./Category.ts";
 
 export type Transaction = {
     transactionId: number;
@@ -7,6 +8,7 @@ export type Transaction = {
     transactionType: string;
     amount: number;
     description: string;
-    category: string;
+    category: Category;
+    kgCo2: number;
     date: string;
 }

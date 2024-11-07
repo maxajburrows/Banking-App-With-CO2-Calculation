@@ -1,8 +1,8 @@
 import axios from "axios";
 
 import {useEffect, useState} from "react";
-import {Account} from "./types/Account.ts";
-import {User} from "./types/User.ts";
+import {Account} from "../types/Account.ts";
+import {User} from "../types/User.ts";
 import {useNavigate} from "react-router-dom";
 
 
@@ -40,6 +40,9 @@ function Homepage() {
           <h1>Welcome back {usersName}</h1>
           <button onClick={() => navigate(`/accounts/${username}/transfer`)}>
               <h2>Transfer money</h2>
+          </button>
+          <button onClick={() => navigate(`/accounts/${accounts[1].iban}/insights`)}>
+              <h2>Insights</h2>
           </button>
           <h1>Your Accounts</h1>
           {accounts.map((account) => (

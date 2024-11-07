@@ -1,11 +1,11 @@
 import axios from "axios";
 
 import { useParams } from "react-router-dom";
-import {Transaction} from "./types/Transaction.ts";
+import {Transaction} from "../types/Transaction.ts";
 import {useEffect, useState} from "react";
 
 
-function Transactions() {
+function Insights() {
     const [transactions, setTransactions] = useState<Transaction[]>([]);
     const baseUrl : string = "http://localhost:8080/transactions/";
     const requestHeaders : object = { "Authorization": `Bearer ${localStorage.getItem("token")}` };
@@ -27,16 +27,14 @@ function Transactions() {
 
     return (
         <div>
-            <h1>Transactions</h1>
+            <h1>Insights</h1>
             {transactions.map((transaction) => (
                 <button type="button" className="btn btn-outline-dark btn-lg btn-block">
-                    <p>{transaction.toBankAccount}</p>
-                    <p>{transaction.transactionType}</p>
-                    <p>{transaction.amount}</p>
+                    <p>{transaction.kgCo2}</p>
                 </button>
             ))}
         </div>
     )
 }
 
-export default Transactions
+export default Insights
