@@ -1,20 +1,21 @@
 import axios from "axios";
 
 import { useParams } from "react-router-dom";
-import {Transaction} from "../types/Transaction.ts";
+// import {Transaction} from "../types/Transaction.ts";
 import {useEffect, useState} from "react";
+import {InsightsResponse} from "../types/InsightsResponse.ts";
 
 
 function Insights() {
-    const [transactions, setTransactions] = useState<Transaction[]>([]);
-    const baseUrl : string = "http://localhost:8080/transactions/";
+    const [insights, setInsights] = useState<InsightsResponse>({totalSpend: 0, categorySpend: new Map(), totalCo2: 0, categoryCo2: new Map()});
+    const baseUrl : string = "http://localhost:8080/insights/";
     const requestHeaders : object = { "Authorization": `Bearer ${localStorage.getItem("token")}` };
     const { iban } = useParams();
 
-    async function fetchTransactions() {
+    async function fetchInsights() {
         try {
-            const response : Transaction[]  = (await axios.get(`${baseUrl}${iban}`, { headers: requestHeaders })).data;
-            setTransactions(response)
+            const response : InsightsResponse  = (await axios.get(`${baseUrl}${iban}`, { headers: requestHeaders })).data;
+            setInsights(response)
             console.log(response);
         } catch (e) {
             console.error(e);
@@ -22,17 +23,13 @@ function Insights() {
     }
 
     useEffect(() => {
-        fetchTransactions();
+        fetchInsights();
     }, []);
 
     return (
         <div>
             <h1>Insights</h1>
-            {transactions.map((transaction) => (
-                <button type="button" className="btn btn-outline-dark btn-lg btn-block">
-                    <p>{transaction.kgCo2}</p>
-                </button>
-            ))}
+            <p>{insights.totalSpend}</p>
         </div>
     )
 }
