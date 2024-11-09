@@ -33,7 +33,16 @@
     overflow: hidden;
 }
 
+.blur-bg {
+    background-color: hsla(0, 0%, 90%, 0.0) !important;
+    backdrop-filter: saturate(200%) blur(40px);
+}
+
 .bg-glass {
     background-color: hsla(0, 0%, 90%, 0.6) !important;
     backdrop-filter: saturate(200%) blur(25px);
+}
+
+.account-button {
+    margin-top: 30px; /* Adjust the value as needed */
 }
