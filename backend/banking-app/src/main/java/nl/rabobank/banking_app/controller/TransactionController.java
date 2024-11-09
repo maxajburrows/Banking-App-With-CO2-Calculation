@@ -39,8 +39,6 @@ public class TransactionController {
         return service.addTransaction(transaction);
     }
 
-    // TODO: Add send money endpoint.
-
     @PatchMapping("/{transactionId}")
     public Transaction editCategory(@PathVariable Long transactionId, @RequestBody Category category) {
         return service.editCategory(transactionId, category);

@@ -11,8 +11,6 @@ import nl.rabobank.banking_app.model.entities.KnownIban;
 import nl.rabobank.banking_app.repository.CategoryRepository;
 import nl.rabobank.banking_app.repository.KnownIbanRepository;
 import nl.rabobank.banking_app.repository.TransactionRepository;
-import nl.rabobank.banking_app.model.PeriodBin;
-import nl.rabobank.banking_app.model.SpendingItem;
 import nl.rabobank.banking_app.model.entities.Transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +35,16 @@ public class TransactionService {
     }
 
     public List<Transaction> listAllTransactionsByAccountNumber(String iban) {
-        return bankAccountService.getBankAccountByIban(iban).getTransactions();
+        List<Transaction> transactions = bankAccountService.getBankAccountByIban(iban).getTransactions();
+        transactions.sort((t1, t2) -> t2.getTransactionDateTime().compareTo(t1.getTransactionDateTime()));
+        return transactions;
     }
 
     public Transaction addTransaction(NewTransaction transaction) {
         BankAccount transactionAccount = bankAccountService.getBankAccountByIban(transaction.transactionOwnerUsername());
         Category category = categoriseTransaction(transaction);
 
-        Transaction fullTransaction = new Transaction(transaction, transactionAccount, category); // TODO: Add CO2 emisions to full transaction
+        Transaction fullTransaction = new Transaction(transaction, transactionAccount, category);
         return transactionRepository.save(fullTransaction);
     }
 
@@ -65,14 +65,5 @@ public class TransactionService {
             return knownIban.get().getCategory();
         }
         return categoryRepository.findById("Other").get();
-    }
-
-    public List<SpendingItem> calculateSpending(String accountIBAN, Optional<LocalDateTime> startDate, Optional<LocalDateTime> endDate, Optional<PeriodBin> periodBin) {
-        // If no start date no filter.
-        // If no end date no filter.
-        // If no period bin default to week.
-        // Is period bin ok for now.
-        // Is there a better way to do this?
-        return null;
     }
 }

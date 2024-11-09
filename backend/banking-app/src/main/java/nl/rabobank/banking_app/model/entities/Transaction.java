@@ -117,4 +117,16 @@ public class Transaction {
     public void setTransactionDateTime(final LocalDateTime transactionDateTime) {
         this.transactionDateTime = transactionDateTime;
     }
+
+    public void setTransactionType(final TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public double getKgCo2() {
+        return kgCo2;
+    }
+
+    public void setKgCo2(final double kgCo2) {
+        this.kgCo2 = kgCo2;
+    }
 }
