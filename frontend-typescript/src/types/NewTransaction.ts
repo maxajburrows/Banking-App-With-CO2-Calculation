@@ -1,5 +1,5 @@
 export type NewTransaction = {
-    transactionOwner: string;
+    transactionOwnerIban: string;
     toBankAccount: string;
     amount: number;
     description: string;

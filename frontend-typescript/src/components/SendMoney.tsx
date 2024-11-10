@@ -18,7 +18,7 @@ function SendMoney() {
         e.preventDefault();
         const requestUrl: string = "http://localhost:8080/transactions";
         const requestBody: object = {
-            transactionOwnerUsername: username,
+            transactionOwnerIban: username,
             toBankAccount: receiverIban,
             amount,
             description
@@ -66,7 +66,7 @@ function SendMoney() {
                                             <select className='form-select'>
                                                 <option selected>Select your account</option>
                                                 {accounts.map((account) => (
-                                                    <option value={account.iban}>{account.accountName}</option>
+                                                    <option value={account.iban}>{account.accountName}</option> // TODO: some setter here
                                                 ))}
                                             </select>
                                         </div>

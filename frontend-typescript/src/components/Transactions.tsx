@@ -32,7 +32,7 @@ function Transactions() {
                     <h1 className="my-5 display-5 fw-bold ls-tight" style={{color: 'hsl(218, 81%, 95%)'}}>Transactions</h1>
                     {transactions.map((transaction) => (
                         <div className="card bg-glass">
-                            <div className="card-body bg-glass row px-4 py-5 px-md-5">
+                            <div className="card-body bg-glass row">
                                 <div className="col">{transaction.toBankAccount}</div>
                                 <div className="col">{transaction.transactionType}</div>
                                 <div className="col">{transaction.amount}</div>

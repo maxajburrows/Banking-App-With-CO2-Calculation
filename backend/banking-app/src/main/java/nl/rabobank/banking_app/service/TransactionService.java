@@ -41,7 +41,7 @@ public class TransactionService {
     }
 
     public Transaction addTransaction(NewTransaction transaction) {
-        BankAccount transactionAccount = bankAccountService.getBankAccountByIban(transaction.transactionOwnerUsername());
+        BankAccount transactionAccount = bankAccountService.getBankAccountByIban(transaction.transactionOwnerIban());
         Category category = categoriseTransaction(transaction);
 
         Transaction fullTransaction = new Transaction(transaction, transactionAccount, category);
