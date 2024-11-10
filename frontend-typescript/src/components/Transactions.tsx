@@ -26,16 +26,28 @@ function Transactions() {
     }, []);
 
     return (
-        <section className="background-radial-gradient overflow-hidden vh-100 justify-content-center">
-            <div className="container px-4 px-md-5 text-center text-lg-start my-5">
+        <section className="background-radial-gradient min-vh-100 justify-content-center">
+            <div className="container px-4 px-md-5 text-center text-lg-start">
                 <div className="row gx-lg-5 align-items-center mb-5">
                     <h1 className="my-5 display-5 fw-bold ls-tight" style={{color: 'hsl(218, 81%, 95%)'}}>Transactions</h1>
+                    <div className="container">
+                        <div className="row align-self-center mb-2">
+                            <div className="col-6" style={{color: 'hsl(218, 81%, 85%)'}}>Recipient</div>
+                            <div className="col-3" style={{color: 'hsl(218, 81%, 85%)'}}>Category</div>
+                            <div className="col-3" style={{color: 'hsl(218, 81%, 85%)'}}>Amount</div>
+                        </div>
+                    </div>
                     {transactions.map((transaction) => (
-                        <div className="card bg-glass">
-                            <div className="card-body bg-glass row">
-                                <div className="col">{transaction.toBankAccount}</div>
-                                <div className="col">{transaction.transactionType}</div>
-                                <div className="col">{transaction.amount}</div>
+                        <div className="card blur-bg mt-2">
+                            <div className="card-body blur-bg row transaction-card">
+                                <div className="col-6 transaction-text" style={{color: 'hsl(218, 81%, 85%)'}}>{transaction.toBankAccount}</div>
+                                <div className="col-3 transaction-text" style={{color: 'hsl(218, 81%, 85%)'}}>{transaction.category.categoryName}</div>
+                                {transaction.transactionType === "SENT" &&
+                                    <div className="col-3 align-self-end transaction-text fw-bold"
+                                         style={{color: 'red'}}>-€{transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div>}
+                                {transaction.transactionType === "RECEIVED" &&
+                                    <div className="col-3 align-self-end transaction-text fw-bold"
+                                         style={{color: 'green'}}>-€{transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div>}
                             </div>
                         </div>
                     ))}

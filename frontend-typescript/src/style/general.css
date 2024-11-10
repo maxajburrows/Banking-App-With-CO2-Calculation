@@ -65,4 +65,15 @@
     margin-top: 0.5rem;
 }
 
+.transaction-card {
+    font-size: 0.8rem;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.transaction-text {
+    padding-right: 0.5rem !important;
+    padding-left: 0.5rem !important;
+}
+
 

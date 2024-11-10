@@ -63,6 +63,7 @@ public class DatabaseSeeder {
         createCategories();
         createKnownIbans();
         createBankAccounts();
+        createExampleIbans();
     }
 
     public void createCategories() {
@@ -86,12 +87,17 @@ public class DatabaseSeeder {
     }
 
     public void createKnownIbans() {
-        for (Category category : constantCategoryList) {
+        for (Category category : randomCategoryList) {
             for (int i = 0; i < 20; i++) {
                 String iban = generateRandomIban();
                 knownIbanRepository.save(new KnownIban(iban, category));
             }
         }
+    }
+
+    public void createExampleIbans() {
+        knownIbanRepository.save(new KnownIban("NL16INGB0390744735", randomCategoryList.get(0)));
+        knownIbanRepository.save(new KnownIban("NL89ABNA0476958822", randomCategoryList.get(2)));
     }
 
     public static String generateRandomIban() {
@@ -138,8 +144,8 @@ public class DatabaseSeeder {
         LocalDateTime now = LocalDateTime.now();
         List<KnownIban> knownIbans = knownIbanRepository.findAll();
         for (BankAccount currentAccount : currentAccounts) {
-            for (int j = 0; j < 10; j++) {
-                if (j > 0 && !currentAccount.getAccountName().equals("Max's current")) {
+            for (int j = 0; j < 15; j++) {
+                if (j > 1 && !currentAccount.getAccountName().equals("Max's current")) {
                     continue;
                 }
                 for (KnownIban knownIban : knownIbans) {

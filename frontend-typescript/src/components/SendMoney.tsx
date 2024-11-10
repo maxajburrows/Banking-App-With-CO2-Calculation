@@ -59,8 +59,8 @@ function SendMoney() {
                         <div className="col-lg-6 mb-5 mb-lg-0 position-relative">
                             <div id="radius-shape-1" className="position-absolute rounded-circle shadow-5-strong"></div>
                             <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
-                            <div className="card bg-glass">
-                                <div className="card-body bg-glass px-4 py-5 px-md-5">
+                            <div className="card blur-bg">
+                                <div className="card-body blur-bg px-4 py-5 px-md-5">
                                     <form onSubmit={sendMoneyRequest}>
                                         <div data-mdb-input-init className="form-outline mb-4">
 
@@ -72,17 +72,17 @@ function SendMoney() {
                                             </select>
                                         </div>
                                         <div data-mdb-input-init className="form-outline mb-4">
-                                            <label className="form-label" htmlFor="ReceiverIban">Iban</label>
+                                            <label className="form-label" htmlFor="ReceiverIban" style={{color: 'hsl(218, 81%, 95%)'}}>Iban</label>
                                             <input type="text" id="ReceiverIban" className="form-control" placeholder="Enter receipients Iban" value={receiverIban}
                                                    onChange={e => setReceiverIban(e.target.value)}/>
                                         </div>
                                         <div data-mdb-input-init className="form-outline mb-4">
-                                            <label className="form-label" htmlFor="amount">Amount</label>
+                                            <label className="form-label" htmlFor="amount" style={{color: 'hsl(218, 81%, 95%)'}}>Amount</label>
                                             <input className="form-control" type="number" id="amount" placeholder="Enter transfer amount" value={amount}
                                                    onChange={e => setAmount(e.target.value)}/>
                                         </div>
                                         <div data-mdb-input-init className="form-outline mb-4">
-                                            <label className="form-label" htmlFor="description">Description</label>
+                                            <label className="form-label" htmlFor="description" style={{color: 'hsl(218, 81%, 95%)'}}>Description</label>
                                             <input className="form-control" type="text" id="description" placeholder="Enter description" value={description}
                                                    onChange={e => setDescription(e.target.value)}/>
                                         </div>
