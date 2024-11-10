@@ -48,7 +48,7 @@ function Login() {
                     <div className="card bg-glass">
                         <div className="card-body bg-glass px-4 py-5 px-md-5">
                             <form onSubmit={handleLogin}>
-                                {failedLogin && <p>Incorrect username or password</p>}
+                                {failedLogin && <p style={{color: 'red'}}>Incorrect username or password</p>}
 
                                 <div data-mdb-input-init className="form-outline mb-4">
                                     <label className="form-label" htmlFor="form3Example3">Email address</label>
