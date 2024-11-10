@@ -62,8 +62,8 @@ function Homepage() {
                                 {accounts.map((account) => (
                                             <button type="button" className="btn btn-outline-light account-button" onClick={() => goToAccount(account.iban)}>
                                                 <h2>{account.accountName}</h2>
-                                                <p>{account.iban}</p>
-                                                <p>€{account.balance.toFixed(2)}</p>
+                                                <p className="iban">{account.iban}</p>
+                                                <h4>€{account.balance.toFixed(2)}</h4>
                                             </button>
                                 ))}
                             </div>
