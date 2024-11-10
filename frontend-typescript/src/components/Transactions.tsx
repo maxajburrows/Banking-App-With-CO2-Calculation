@@ -31,11 +31,13 @@ function Transactions() {
                 <div className="row gx-lg-5 align-items-center mb-5">
                     <h1 className="my-5 display-5 fw-bold ls-tight" style={{color: 'hsl(218, 81%, 95%)'}}>Transactions</h1>
                     {transactions.map((transaction) => (
-                        <button type="button" className="btn btn-outline-dark btn-lg btn-block">
-                            <p>{transaction.toBankAccount}</p>
-                            <p>{transaction.transactionType}</p>
-                            <p>{transaction.amount}</p>
-                        </button>
+                        <div className="card bg-glass">
+                            <div className="card-body bg-glass row px-4 py-5 px-md-5">
+                                <div className="col">{transaction.toBankAccount}</div>
+                                <div className="col">{transaction.transactionType}</div>
+                                <div className="col">{transaction.amount}</div>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>

@@ -45,10 +45,24 @@
 
 .account-button {
     margin-top: 30px;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .iban {
     margin-top: 1rem;
+}
+
+.insights-button {
+    margin-left: 1rem;
+}
+
+.transfer-button {
+    margin-right: 1rem;
+}
+
+.button-text {
+    margin-top: 0.5rem;
 }
 
 
