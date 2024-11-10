@@ -10,6 +10,7 @@ function SendMoney() {
     const navigate = useNavigate();
 
     const [accounts, setAccounts] = useState<Account[]>([]);
+    const [senderIban, setSenderIban] = useState("");
     const [receiverIban, setReceiverIban] = useState("");
     const [amount, setAmount] = useState("");
     const [description, setDescription] = useState("");
@@ -18,7 +19,7 @@ function SendMoney() {
         e.preventDefault();
         const requestUrl: string = "http://localhost:8080/transactions";
         const requestBody: object = {
-            transactionOwnerIban: username,
+            transactionOwnerIban: senderIban,
             toBankAccount: receiverIban,
             amount,
             description
@@ -63,10 +64,10 @@ function SendMoney() {
                                     <form onSubmit={sendMoneyRequest}>
                                         <div data-mdb-input-init className="form-outline mb-4">
 
-                                            <select className='form-select'>
+                                            <select className='form-select' value={senderIban} onChange={e => setSenderIban(e.target.value)}>
                                                 <option selected>Select your account</option>
                                                 {accounts.map((account) => (
-                                                    <option value={account.iban}>{account.accountName}</option> // TODO: some setter here
+                                                    <option value={account.iban}>{account.accountName}</option>
                                                 ))}
                                             </select>
                                         </div>

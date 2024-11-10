@@ -19,11 +19,6 @@ public class AuthenticationController {
         this.service = service;
     }
 
-    //    @PostMapping("/register")
-//    public AuthenticationResponse register(@RequestBody RegisterRequest request) {
-//        return new AuthenticationResponse("User registered successfully");
-//    }
-
     @PostMapping("/login")
     public String login(@RequestBody AuthenticationRequest request) {
         return service.authenticate(request);
