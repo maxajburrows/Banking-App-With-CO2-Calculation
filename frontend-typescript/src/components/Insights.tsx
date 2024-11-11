@@ -1,9 +1,9 @@
 import axios from "axios";
 
 import {useParams} from "react-router-dom";
-// import {Transaction} from "../types/Transaction.ts";
 import {useEffect, useState} from "react";
 import {InsightsResponse} from "../types/InsightsResponse.ts";
+import Pie2 from "./Pie2.tsx";
 
 
 function Insights() {
@@ -28,12 +28,23 @@ function Insights() {
 
     return (
         <>
-            <section className="background-radial-gradient overflow-hidden vh-100 justify-content-center">
-                <div className="container px-4 px-md-5 text-center text-lg-start my-5">
-                    <div className="row gx-lg-5 align-items-center mb-5">
-                        <div>
-                            <h1 className="my-5 display-5 fw-bold ls-tight" style={{color: 'hsl(218, 81%, 95%)'}}>Insights</h1>
-                            <p>{insights.totalSpend}</p>
+            <section className="background-radial-gradient min-vh-100 justify-content-center">
+                <div className="container px-4 px-md-5 text-center text-lg-start">
+                    <div className="row gx-lg-5 align-items-center">
+                        <h1 className="my-5 display-5 fw-bold ls-tight" style={{color: 'hsl(218, 81%, 95%)'}}>Insights</h1>
+                        <h3 className="mb-4" style={{color: 'hsl(218, 81%, 95%)'}}>Your total expenditure in the last year was
+                            € {insights.totalSpend.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}.</h3>
+                        <div className="card blur-bg mb-4">
+                            <div className="card-body blur-bg" >
+                                <Pie2 data={insights.categorySpend} title="Yealy spend by Category"/>
+                            </div>
+                        </div>
+                        <h3 className="mb-4" style={{color: 'hsl(218, 81%, 95%)'}}>Your total CO2 emissions in the last year
+                            were {insights.totalCo2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} kg.</h3>
+                        <div className="card blur-bg mb-4">
+                            <div className="card-body blur-bg">
+                                <Pie2 data={insights.categorySpend} title="Yealy CO2 emissions by Category"/>
+                            </div>
                         </div>
                     </div>
                 </div>

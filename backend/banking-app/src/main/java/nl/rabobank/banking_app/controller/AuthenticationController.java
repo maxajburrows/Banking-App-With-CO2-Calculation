@@ -1,7 +1,6 @@
 package nl.rabobank.banking_app.controller;
 
 import nl.rabobank.banking_app.model.AuthenticationRequest;
-import nl.rabobank.banking_app.model.AuthenticationResponse;
 import nl.rabobank.banking_app.service.AuthenticationService;
 
 import org.springframework.web.bind.annotation.PostMapping;

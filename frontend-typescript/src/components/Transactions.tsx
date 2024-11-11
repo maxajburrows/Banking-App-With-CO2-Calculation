@@ -47,7 +47,7 @@ function Transactions() {
                                          style={{color: 'red'}}>-€{transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div>}
                                 {transaction.transactionType === "RECEIVED" &&
                                     <div className="col-3 align-self-end transaction-text fw-bold"
-                                         style={{color: 'green'}}>-€{transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div>}
+                                         style={{color: 'green'}}>+€{transaction.amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</div>}
                             </div>
                         </div>
                     ))}
