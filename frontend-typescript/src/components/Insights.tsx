@@ -43,7 +43,7 @@ function Insights() {
                             were {insights.totalCo2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} kg.</h3>
                         <div className="card blur-bg mb-4">
                             <div className="card-body blur-bg">
-                                <Pie2 data={insights.categorySpend} title="Yealy CO2 emissions by Category"/>
+                                <Pie2 data={insights.categoryCo2} title="Yealy CO2 emissions by Category"/>
                             </div>
                         </div>
                     </div>

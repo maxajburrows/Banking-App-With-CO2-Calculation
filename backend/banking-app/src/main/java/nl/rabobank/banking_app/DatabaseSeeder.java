@@ -165,7 +165,7 @@ public class DatabaseSeeder {
             if (currentAccount.getAccountName().equals("Max's current")) {
                 salary = BigDecimal.valueOf(2500);
             } else {
-                salary = BigDecimal.valueOf(10000);
+                salary = BigDecimal.valueOf(11000);
             }
 
             for (Category category : constantCategoryList) {
