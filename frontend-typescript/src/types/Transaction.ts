@@ -10,5 +10,5 @@ export type Transaction = {
     description: string;
     category: Category;
     kgCo2: number;
-    date: string;
+    transactionDateTime: string;
 }
